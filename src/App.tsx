@@ -1,26 +1,35 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+import { BudgetChart } from './budget-chart';
+import { fetchDataPerModule, ModuleData } from './services/data';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+interface AppProps { }
+interface AppState { 
+  moduleData: ModuleData[];
+}
+
+class App extends React.Component<AppProps, AppState> {
+  constructor(props: AppProps) {
+    super(props);
+    this.state = { moduleData: [] };
+  }
+  async componentDidMount() {
+    try {
+      const moduleData = await fetchDataPerModule();
+      this.setState({ moduleData });
+    } catch (e) {
+      console.log(e);
+    }
+  }
+
+  render() {
+    const { moduleData } = this.state;
+    return (
+      <div className="App">
+        <BudgetChart budgetData={moduleData}></BudgetChart>
+      </div>
+    );
+  }
 }
 
 export default App;
