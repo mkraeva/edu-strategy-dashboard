@@ -23,6 +23,7 @@ export async function fetchDataPerModule() {
       skipEmptyLines: true,
       header: true,
       transformHeader: (header => dataPerModuleHeaderMapping[header] || header),
+      transform: (value) => value.trim(),
       complete: ({ errors, data }) => {
         if (errors?.length) {
           reject(errors);
