@@ -6,6 +6,8 @@ export interface AreaTheme {
   nationalProgramColor: string;
   euProgramColor: string;
   budgetColor: string;
+
+  textColor: string;
 }
 
 export const areaColors = [
@@ -60,6 +62,8 @@ export const areaThemes: AreaTheme[] = zip(
     nationalProgramColor: np,
     euProgramColor: eu,
     budgetColor: budget,
+
+    textColor: '#002A41',
   };
 });
 
