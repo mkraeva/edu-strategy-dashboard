@@ -2,20 +2,7 @@ export interface PriorityArea {
   id: number;
   name: string;
   logo: string;
-  color: string;
 }
-
-export const areaColors = [
-  '#8A0464',
-  '#EF4643',
-  '#FAB316',
-  '#82C44A',
-  '#7EA4A4',
-  '#3ABC95',
-  '#12BCBF',
-  '#02618F',
-  '#024F7A',
-];
 
 export const priorityAreas: PriorityArea[] = [
   'Ранно детско развитие',
@@ -31,5 +18,4 @@ export const priorityAreas: PriorityArea[] = [
   id: idx,
   name: area,
   logo: `${process.env.PUBLIC_URL}/area-logos/PR${idx + 1}.png`,
-  color: areaColors[idx],
 }));
