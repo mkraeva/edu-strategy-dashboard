@@ -7,6 +7,10 @@ export const useStyles = createUseStyles((theme: AreaTheme) => {
       display: 'flex',
       flexDirection: 'row',
     },
+    budgetChartChartContainer: {
+      display: 'flex',
+      flexDirection: 'column',
+    },
     legend: {
       display: 'flex',
       flexDirection: 'column',

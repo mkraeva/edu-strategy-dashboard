@@ -6,7 +6,11 @@ export enum BudgetSourceType {
   YearlyBudget = 'Бюджет',
 }
 
-export interface ModuleData {
+export interface HasYear {
+  year: number;
+}
+
+export interface ModuleData extends HasYear {
   area: string;
   type: BudgetSourceType;
   program: string;
@@ -47,10 +51,9 @@ export async function fetchDataPerModule() {
   });
 }
 
-export interface ActivityData {
+export interface ActivityData extends HasYear {
   area: string;
   activity: string;
-  year: number;
   nationalBudget: number;
   externalBudget: number;
 }

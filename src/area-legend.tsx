@@ -25,7 +25,7 @@ export const AreaLegend: React.FC<BudgetChartProps> = ({ budgetData }: BudgetCha
     <div className="legend">
       {
         sortedPriorityAreas.map(area => (
-            <ThemeProvider theme={getAreaTheme(area.name)}>
+            <ThemeProvider theme={getAreaTheme(area.name)} key={area.name}>
               <AreaLegendEntry
                 area={area}
                 areaBudget={budgetByArea.get(area.name) || 0}

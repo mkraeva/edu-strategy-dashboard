@@ -1,45 +1,97 @@
-import React from 'react';
-import { Redirect, Route, Switch } from 'react-router-dom';
-import './App.css';
-import { BudgetChart } from './budget-chart';
-import PriorityArea from './components/priority-area/priority-area';
-import { fetchDataPerModule, ModuleData } from './services/data';
+import React from "react";
+import { Redirect, Route, Switch } from "react-router-dom";
+import { ActivityBudgetChart } from "./activity-budget-chart";
+import "./App.css";
+import { BudgetChart } from "./budget-chart";
+import PriorityArea from "./components/priority-area/priority-area";
+import SelectedYearContext from "./selected-year-context";
+import {
+  ActivityData,
+  fetchDataPerActivity,
+  fetchDataPerModule,
+  ModuleData,
+} from "./services/data";
 
-interface AppProps { }
-interface AppState { 
+interface AppProps {}
+interface AppState {
   moduleData: ModuleData[];
+  activityData: ActivityData[];
+  selectedYear: number;
 }
 
 class App extends React.Component<AppProps, AppState> {
   constructor(props: AppProps) {
     super(props);
-    this.state = { moduleData: [] };
+    this.state = { moduleData: [], activityData: [], selectedYear: 0 };
   }
+
   async componentDidMount() {
     try {
       const moduleData = await fetchDataPerModule();
-      this.setState({ moduleData });
+      const activityData = await fetchDataPerActivity();
+      let selectedYear = 0;
+
+      const allYears = Array.from(
+        new Set(moduleData.map((d) => d.year))
+      ).sort();
+
+      if (allYears.length > 0) {
+        selectedYear = allYears[allYears.length - 1];
+      }
+      this.setState({ moduleData, activityData, selectedYear });
     } catch (e) {
       console.log(e);
     }
   }
 
+  setSelectedYear(year: number) {
+    this.setState({ ...this.state, selectedYear: year });
+  }
+
+  filterByYear<T extends { year: number }>(data: T[]): T[] {
+    return data.filter((d) => d.year === this.state.selectedYear);
+  }
+
+  getAvailableYears(): number[] {
+    const { moduleData, activityData } = this.state;
+    return Array.from(
+      new Set(
+        activityData.map((d) => d.year).concat(moduleData.map((d) => d.year))
+      )
+    ).sort();
+  }
+
   render() {
-    const { moduleData } = this.state;
+    const { moduleData, activityData, selectedYear } = this.state;
+    const [yearModuleData, yearActivityData] = [
+      this.filterByYear(moduleData),
+      this.filterByYear(activityData),
+    ];
     return (
-      <div className="App">
-        <Switch>
-          <Route path="/all-areas">
-            <BudgetChart budgetData={moduleData}></BudgetChart>
-          </Route>
-          <Route path="/priority-area/:id">
-            <PriorityArea budgetData={moduleData} />
-          </Route>
-          <Route path="/">
-            <Redirect to="/all-areas"></Redirect>
-          </Route>
-        </Switch>
-      </div>
+      <SelectedYearContext.Provider
+        value={{
+          selectedYear,
+          availableYears: this.getAvailableYears(),
+          setSelectedYear: (y) => this.setSelectedYear(y),
+        }}
+      >
+        <div className="App">
+          <Switch>
+            <Route path="/all-areas">
+              <BudgetChart budgetData={yearModuleData} />
+            </Route>
+            <Route path="/all-activities">
+              <ActivityBudgetChart activityData={yearActivityData} />
+            </Route>
+            <Route path="/priority-area/:id">
+              <PriorityArea budgetData={yearModuleData} />
+            </Route>
+            <Route path="/">
+              <Redirect to="/all-areas" />
+            </Route>
+          </Switch>
+        </div>
+      </SelectedYearContext.Provider>
     );
   }
 }

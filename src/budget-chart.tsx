@@ -4,6 +4,7 @@ import { AreaLegend } from './area-legend';
 import { useStyles } from './budget-chart.styles';
 import { ModuleData } from './services/data';
 import { getAreaTheme } from './themes';
+import YearBreakdown from './year-breakdown';
 
 type BudgetChartProps = {
   budgetData: ModuleData[],
@@ -13,6 +14,7 @@ const BudgetChart: React.FC<BudgetChartProps> = ({ budgetData }) => {
   const classes = useStyles();
   return (
     <div className={classes.budgetChartContainer}>
+      <YearBreakdown></YearBreakdown>
       <Plot
         data={[
           {
