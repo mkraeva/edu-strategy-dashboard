@@ -1,6 +1,8 @@
 import React from 'react';
+import { Redirect, Route, Switch } from 'react-router-dom';
 import './App.css';
 import { BudgetChart } from './budget-chart';
+import PriorityArea from './priority-area';
 import { fetchDataPerModule, ModuleData } from './services/data';
 
 interface AppProps { }
@@ -26,7 +28,17 @@ class App extends React.Component<AppProps, AppState> {
     const { moduleData } = this.state;
     return (
       <div className="App">
-        <BudgetChart budgetData={moduleData}></BudgetChart>
+        <Switch>
+          <Route path="/all-areas">
+            <BudgetChart budgetData={moduleData}></BudgetChart>
+          </Route>
+          <Route path="/priority-area/:id">
+            <PriorityArea budgetData={moduleData} />
+          </Route>
+          <Route path="/">
+            <Redirect to="/all-areas"></Redirect>
+          </Route>
+        </Switch>
       </div>
     );
   }

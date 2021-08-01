@@ -26,15 +26,18 @@ export const useStyles = createUseStyles((theme: AreaTheme) => {
       fontWeight: 'bold',
     },
     seeMore: {
+      display: 'inline-block',
+
+      padding: '9px 18px',
+
       color: 'white',
       backgroundColor: theme.primaryColor,
       borderColor: theme.primaryColor,
       boxShadow: '0px 10px 12px #00000029',
       borderRadius: '4px',
-      opacity: 1,
 
-      padding: '9px 18px',
       fontWeight: 'bold',
+      textDecoration: 'none',
     }
   };
   return result;

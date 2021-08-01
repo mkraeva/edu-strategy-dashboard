@@ -1,4 +1,5 @@
 import { useTheme } from 'react-jss';
+import { Link } from 'react-router-dom';
 import { useStyles } from './area-legend-entry.styles';
 import { PriorityArea } from './services/priority-areas';
 import { AreaTheme } from './themes';
@@ -20,7 +21,12 @@ const AreaLegendEntry = ({area, areaBudget, totalBudget }: AreaLegendEntryProps)
     <div className={classes.areaData}>
       <div className={classes.areaName}>{area.name}</div>
       <div className={classes.areaStats}>{budgetPercentage}% - {areaBudget}лв.</div>
-      <button className={classes.seeMore}>Виж повече</button>
+      <Link
+        to={`/priority-area/${area.id}`}
+        className={classes.seeMore}
+      >
+        Виж повече
+      </Link>
     </div>
   </div>
   )

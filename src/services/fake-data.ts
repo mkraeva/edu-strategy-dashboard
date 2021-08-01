@@ -11,4 +11,4 @@ export const fakeData: ProgramBudget[] = [
 
 export async function fetchFakeData() {
   return Promise.resolve(fakeData);
-} 
+}

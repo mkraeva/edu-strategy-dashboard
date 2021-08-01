@@ -1,4 +1,5 @@
 export interface PriorityArea {
+  id: number;
   name: string;
   logo: string;
   color: string;
@@ -27,6 +28,7 @@ export const priorityAreas: PriorityArea[] = [
   'Учене през целия живот',
   'Ефикасно управление и участие в мрежи',
 ].map((area, idx) => ({
+  id: idx,
   name: area,
   logo: `${process.env.PUBLIC_URL}/area-logos/PR${idx + 1}.png`,
   color: areaColors[idx],
