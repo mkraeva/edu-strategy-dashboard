@@ -1,5 +1,6 @@
-import { zip } from "lodash";
-import { priorityAreas } from "./services/priority-areas";
+import { hsl } from 'd3-color';
+import { range, zip } from 'lodash';
+import { priorityAreas } from './services/priority-areas';
 
 export interface AreaTheme {
   primaryColor: string;
@@ -70,4 +71,17 @@ export const areaThemes: AreaTheme[] = zip(
 export function getAreaTheme(areaName: string) {
   const areaIdx = priorityAreas.map(area => area.name).indexOf(areaName);
   return areaThemes[areaIdx];
+}
+
+export function generateShades(hexColor: string, numShades: number) {
+  const c = hsl(hexColor);
+  // if only 1 color is needed, use the provided hexColor
+  // otherwise interpolate around the same hue
+  if (numShades === 1) {
+    return [hexColor];
+  }
+  const lightnessOffset = 5; // don't generate pure white
+  const shades = range(lightnessOffset, numShades + lightnessOffset)
+    .map(idx => hsl(c.h, c.s, idx / (numShades + lightnessOffset)).formatHex());
+  return shades;
 }

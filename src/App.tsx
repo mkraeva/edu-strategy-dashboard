@@ -2,7 +2,7 @@ import React from 'react';
 import { Redirect, Route, Switch } from 'react-router-dom';
 import './App.css';
 import { BudgetChart } from './budget-chart';
-import PriorityArea from './priority-area';
+import PriorityArea from './components/priority-area/priority-area';
 import { fetchDataPerModule, ModuleData } from './services/data';
 
 interface AppProps { }

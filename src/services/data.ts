@@ -1,7 +1,14 @@
 import Papa from 'papaparse';
 
+export enum BudgetSourceType {
+  NationalProgram = 'Национална програма',
+  EuropeanProgram = 'Европейски програми и проекти',
+  YearlyBudget = 'Бюджет',
+}
+
 export interface ModuleData {
   area: string;
+  type: BudgetSourceType;
   program: string;
   module: string;
   budget: number;
@@ -9,9 +16,10 @@ export interface ModuleData {
 
 const dataPerModuleHeaderMapping: {[key: string]: string} = {
   'Приоритетна област': 'area',
-  'Национална програма': 'program',
+  'Дейност': 'program',
   'Модул': 'module',
-  'Средства в лв.': 'budget',
+  'Вид': 'type',
+  'Средства': 'budget',
   'Година': 'year'
 };
 

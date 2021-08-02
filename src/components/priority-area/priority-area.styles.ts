@@ -1,5 +1,5 @@
 import { createUseStyles, WithStylesProps } from 'react-jss';
-import { AreaTheme } from './themes';
+import { AreaTheme } from '../../themes';
 
 export const useStyles = createUseStyles((theme: AreaTheme) => {
   const result = {
@@ -7,11 +7,16 @@ export const useStyles = createUseStyles((theme: AreaTheme) => {
       display: 'flex',
       flexDirection: 'column',
       margin: '100px',
+
+      maxWidth: '1200px',
     },
+
     header: {
       display: 'flex',
       flexDirection: 'row',
       alignItems: 'center',
+
+      marginBottom: '50px',
     },
     headerTitle: {
       display: 'flex',
@@ -23,15 +28,17 @@ export const useStyles = createUseStyles((theme: AreaTheme) => {
       fontWeight: 'bold',
     },
     areaLogo: {
-      width: '70px',
-      height: '70px',
+      width: '100px',
+      height: '100px',
       marginRight: '32px',
     },
 
     progressBarContainer: {
       display: 'flex',
       flexDirection: 'column',
-      maxWidth: '1000px',
+    },
+    progressBarLabel: {
+      marginBottom: '10px',
     },
     progressBar: {
       display: 'flex',
