@@ -21,6 +21,7 @@ const PriorityArea = (props: PriorityAreaProps) => {
   const classes = useStyles({ theme, ...props });
 
   const data = props.budgetData.filter(d => d.area === area.name);
+  const activityData = props.activityData.filter(d => d.area === area.name);
 
   const totalBudget = sum(data.map(d => d.budget));
   const totalSpent = Math.round(0.87 * totalBudget);
@@ -49,7 +50,7 @@ const PriorityArea = (props: PriorityAreaProps) => {
 
         <BudgetSourceChartComponent area={area} budgetData={data}/>
         <div>Area Spending by Activity goes here</div>
-        <ActivityBudgetChart activityData={props.activityData}/>
+        <ActivityBudgetChart activityData={activityData}/>
         <div>Area Indicators progress goes here</div>
       </div>
     </ThemeProvider>

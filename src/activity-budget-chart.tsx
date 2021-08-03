@@ -3,7 +3,7 @@ import Plot from "react-plotly.js";
 import { AreaLegend } from "./area-legend";
 import { useStyles } from "./budget-chart.styles";
 import { ActivityData } from "./services/data";
-import { getAreaTheme } from "./themes";
+import { generateShades, getAreaTheme } from "./themes";
 import YearBreakdown from "./year-breakdown";
 
 type ActivityBudgetChartProps = {
@@ -13,7 +13,11 @@ type ActivityBudgetChartProps = {
 const ActivityBudgetChart: React.FC<ActivityBudgetChartProps> = ({
   activityData,
 }) => {
+  activityData.sort((a, b) => (a.nationalBudget < b.nationalBudget ? 1 : -1));
   const classes = useStyles();
+  const areaColor = activityData.length
+    ? getAreaTheme(activityData[0].area).primaryColor
+    : "#000000";
   return (
     <div className={classes.budgetChartContainer}>
       <div className={classes.budgetChartChartContainer}>
@@ -22,14 +26,12 @@ const ActivityBudgetChart: React.FC<ActivityBudgetChartProps> = ({
         <Plot
           data={[
             {
-              labels: activityData.map((d) => d.area),
+              labels: activityData.map((d) => d.activity),
               values: activityData.map(
                 (d) => d.nationalBudget + d.externalBudget
               ),
               marker: {
-                colors: activityData.map(
-                  (d) => getAreaTheme(d.area).primaryColor
-                ),
+                colors: generateShades(areaColor, activityData.length),
               },
               type: "pie",
               showlegend: false,
