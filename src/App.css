@@ -1,0 +1,10 @@
+.App {
+  display: flex;
+  flex-direction: column;
+  margin: 100px;
+  max-width: 1200px;
+}
+
+.rc-slider-mark {
+  margin-left: 5px;
+}

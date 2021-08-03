@@ -29,7 +29,9 @@ const TooltipSlider = createSliderWithTooltip(Slider);
 const YearBreakdown: React.FunctionComponent = () => {
   const selectedYear = useContext(SelectedYearContext);
   let marks: any = {};
-  selectedYear.availableYears.forEach((i) => (marks[i] = { label: String(i) }));
+  selectedYear.availableYears.forEach(
+    (i) => (marks[i] = { label: String(i) })
+  );
   return (
     <>
       <TooltipSlider

@@ -14,7 +14,9 @@ const BudgetChart: React.FC<BudgetChartProps> = ({ budgetData }) => {
   const classes = useStyles();
   return (
     <div className={classes.budgetChartContainer}>
-      <YearBreakdown></YearBreakdown>
+      <div className={classes.budgetChartChartContainer}>
+      <p>Заглавие, което обяснява какво показва тази графика</p>
+      <YearBreakdown/>
       <Plot
         data={[
           {
@@ -27,8 +29,9 @@ const BudgetChart: React.FC<BudgetChartProps> = ({ budgetData }) => {
             showlegend: false,
           },
         ]}
-        layout={ {width: 860, height: 480, title: 'Заглавие, което обяснява какво показва тази графика'} }
+        layout={ {width: 460, height: 480 } }
       />
+      </div>
       <AreaLegend budgetData={budgetData}></AreaLegend>
     </div>
   );
