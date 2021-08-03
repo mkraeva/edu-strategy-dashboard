@@ -1,6 +1,5 @@
 import React from "react";
 import { Redirect, Route, Switch } from "react-router-dom";
-import { ActivityBudgetChart } from "./activity-budget-chart";
 import "./App.css";
 import { BudgetChart } from "./budget-chart";
 import PriorityArea from "./components/priority-area/priority-area";
@@ -80,11 +79,8 @@ class App extends React.Component<AppProps, AppState> {
             <Route path="/all-areas">
               <BudgetChart budgetData={yearModuleData} />
             </Route>
-            <Route path="/all-activities">
-              <ActivityBudgetChart activityData={yearActivityData} />
-            </Route>
             <Route path="/priority-area/:id">
-              <PriorityArea budgetData={yearModuleData} />
+              <PriorityArea budgetData={yearModuleData} activityData={yearActivityData} />
             </Route>
             <Route path="/">
               <Redirect to="/all-areas" />

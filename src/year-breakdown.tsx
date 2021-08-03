@@ -47,6 +47,7 @@ const YearBreakdown: React.FunctionComponent = () => {
           (x, y) => (x > y ? x : y),
           1990
         )}
+        value={selectedYear.selectedYear}
         dots={true}
         dotStyle={dotStyle}
         marks={marks}

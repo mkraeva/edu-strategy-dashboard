@@ -3,6 +3,7 @@ import Plot from 'react-plotly.js';
 import { BudgetSourceType, ModuleData } from '../../services/data';
 import { PriorityArea } from '../../services/priority-areas';
 import { AreaTheme, generateShades } from '../../themes';
+import YearBreakdown from '../../year-breakdown';
 import { useStyles } from './budget-source-chart.styles';
 
 type BudgetSourceChartProps = {
@@ -44,25 +45,28 @@ const BudgetSourceChartComponent = ({ budgetData, area }: BudgetSourceChartProps
 
   return (
     <div className={classes.budgetSourceContainer}>
-      <Plot
-        data={[
-          {
-            labels: reordered.map(d => `${d.program} ${d.module}`),
-            values: reordered.map(d => d.budget),
-            marker: {
-              colors: reorderedColors,
+      <div className={classes.budgetSourceChartChartContainer}>
+        <YearBreakdown />
+        <p>Заглавие, което обяснява какво показва тази графика</p>
+        <Plot
+          data={[
+            {
+              labels: reordered.map(d => `${d.program} ${d.module}`),
+              values: reordered.map(d => d.budget),
+              marker: {
+                colors: reorderedColors,
+              },
+              type: 'pie',
+              showlegend: false,
+              sort: false,
+              textinfo: 'none',
             },
-            type: 'pie',
-            showlegend: false,
-            sort: false,
-            textinfo: 'none',
-          },
-        ]}
-        layout={{
-          width: 640, height: 480,
-          title: 'Заглавие, което обяснява какво показва тази графика',
-        }}
-      />
+          ]}
+          layout={{
+            width: 460, height: 480,
+          }}
+        />
+      </div>
       <div className={classes.budgetSourceLegend}>
         { reordered.map((moduleData, idx) => (
           <div className={classes.budgetSourceEntry}>

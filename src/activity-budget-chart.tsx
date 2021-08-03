@@ -17,26 +17,26 @@ const ActivityBudgetChart: React.FC<ActivityBudgetChartProps> = ({
   return (
     <div className={classes.budgetChartContainer}>
       <div className={classes.budgetChartChartContainer}>
-      <p>Заглавие, което обяснява какво показва тази графика</p>
-      <YearBreakdown/>
-      <Plot
-        data={[
-          {
-            labels: activityData.map((d) => d.area),
-            values: activityData.map(
-              (d) => d.nationalBudget + d.externalBudget
-            ),
-            marker: {
-              colors: activityData.map(
-                (d) => getAreaTheme(d.area).primaryColor
+        <p>Заглавие, което обяснява какво показва тази графика</p>
+        <YearBreakdown />
+        <Plot
+          data={[
+            {
+              labels: activityData.map((d) => d.area),
+              values: activityData.map(
+                (d) => d.nationalBudget + d.externalBudget
               ),
+              marker: {
+                colors: activityData.map(
+                  (d) => getAreaTheme(d.area).primaryColor
+                ),
+              },
+              type: "pie",
+              showlegend: false,
             },
-            type: "pie",
-            showlegend: false,
-          },
-        ]}
-        layout={{ width: 460, height: 480 }}
-      />
+          ]}
+          layout={{ width: 460, height: 480 }}
+        />
       </div>
       {/* <AreaLegend activityData={activityData}></AreaLegend> */}
     </div>

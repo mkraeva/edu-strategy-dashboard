@@ -2,12 +2,15 @@ import { sum } from 'lodash';
 import { ThemeProvider } from 'react-jss';
 import { useParams } from 'react-router-dom';
 import { useStyles } from './priority-area.styles';
-import { ModuleData } from '../../services/data';
+import { ActivityData, ModuleData } from '../../services/data';
 import { priorityAreas } from '../../services/priority-areas';
 import { getAreaTheme } from '../../themes';
 import BudgetSourceChartComponent from './budget-source-chart';
+import { ActivityBudgetChart } from '../../activity-budget-chart';
+
 export type PriorityAreaProps = {
   budgetData: ModuleData[];
+  activityData: ActivityData[];
 }
 
 const PriorityArea = (props: PriorityAreaProps) => {
@@ -44,8 +47,9 @@ const PriorityArea = (props: PriorityAreaProps) => {
           </div>
         </div>
 
-        <BudgetSourceChartComponent area={area} budgetData={data}></BudgetSourceChartComponent>
+        <BudgetSourceChartComponent area={area} budgetData={data}/>
         <div>Area Spending by Activity goes here</div>
+        <ActivityBudgetChart activityData={props.activityData}/>
         <div>Area Indicators progress goes here</div>
       </div>
     </ThemeProvider>

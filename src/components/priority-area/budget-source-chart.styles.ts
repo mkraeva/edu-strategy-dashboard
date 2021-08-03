@@ -9,6 +9,10 @@ export const useStyles = createUseStyles((theme: AreaTheme) => {
 
       marginTop: '50px',
     },
+    budgetSourceChartChartContainer: {
+      display: 'flex',
+      flexDirection: 'column',
+    },
     budgetSourceLegend: {
       display: 'flex',
       flexDirection: 'column',
