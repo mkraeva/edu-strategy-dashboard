@@ -1,4 +1,3 @@
-import { sum } from 'lodash';
 import { ThemeProvider } from 'react-jss';
 import { useParams } from 'react-router-dom';
 import { useStyles } from './priority-area.styles';
@@ -23,10 +22,6 @@ const PriorityArea = (props: PriorityAreaProps) => {
   const data = props.budgetData.filter(d => d.area === area.name);
   const activityData = props.activityData.filter(d => d.area === area.name);
 
-  const totalBudget = sum(data.map(d => d.budget));
-  const totalSpent = Math.round(0.87 * totalBudget);
-  const pctSpent = Math.round(totalSpent * 100 / totalBudget);
-
   return (
     <ThemeProvider theme={theme}>
       <div className={classes.priorityArea}>
@@ -38,20 +33,8 @@ const PriorityArea = (props: PriorityAreaProps) => {
           </div>
         </div>
 
-        <div className={classes.progressBarContainer}>
-          <div className={classes.progressBarLabel}>Планиран бюджет: {totalBudget}лв.</div>
-          <div className={classes.progressBar} style={{
-            background: `linear-gradient(to right, ${theme.primaryColor} ${pctSpent}%, white ${pctSpent}%)`
-          }}>
-            <div>Усвоени {pctSpent}% ({totalSpent}лв)</div>
-            <div>Остатък {100 - pctSpent}% ({totalBudget - totalSpent}лв)</div>
-          </div>
-        </div>
-
         <BudgetSourceChartComponent area={area} budgetData={data}/>
-        <div>Area Spending by Activity goes here</div>
         <ActivityBudgetChart activityData={activityData}/>
-        <div>Area Indicators progress goes here</div>
       </div>
     </ThemeProvider>
   );

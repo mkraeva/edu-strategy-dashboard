@@ -5,6 +5,7 @@ export const useStyles = createUseStyles((theme: AreaTheme) => {
   const result = {
     areaLegendEntry: {
       margin: '24px',
+      marginLeft: '50px',
       maxWidth: '450px',
 
       display: 'flex',
@@ -13,7 +14,7 @@ export const useStyles = createUseStyles((theme: AreaTheme) => {
     areaLogo: {
       width: '70px',
       height: '70px',
-      marginRight: '32px',
+      marginRight: '16px',
     },
     areaData: {
 

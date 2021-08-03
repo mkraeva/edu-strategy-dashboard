@@ -14,9 +14,11 @@ export const useStyles = createUseStyles((theme: AreaTheme) => {
     legend: {
       display: 'flex',
       flexDirection: 'column',
+
+      marginLeft: '50px',
     },
     areaLegendEntry: {
-      margin: '24px',
+      marginBottom: '24px',
       maxWidth: '450px',
 
       display: 'flex',

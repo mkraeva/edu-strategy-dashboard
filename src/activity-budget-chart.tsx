@@ -1,7 +1,7 @@
+import { sortBy } from "lodash";
 import React from "react";
 import Plot from "react-plotly.js";
-import { AreaLegend } from "./area-legend";
-import { useStyles } from "./budget-chart.styles";
+import { useStyles } from "./components/priority-area/budget-source-chart.styles";
 import { ActivityData } from "./services/data";
 import { generateShades, getAreaTheme } from "./themes";
 import YearBreakdown from "./year-breakdown";
@@ -18,29 +18,45 @@ const ActivityBudgetChart: React.FC<ActivityBudgetChartProps> = ({
   const areaColor = activityData.length
     ? getAreaTheme(activityData[0].area).primaryColor
     : "#000000";
+  const reordered = sortBy(activityData, d => -(d.externalBudget + d.nationalBudget));
+  const colors = generateShades(areaColor, reordered.length);
   return (
-    <div className={classes.budgetChartContainer}>
-      <div className={classes.budgetChartChartContainer}>
-        <p>Заглавие, което обяснява какво показва тази графика</p>
-        <YearBreakdown />
-        <Plot
-          data={[
-            {
-              labels: activityData.map((d) => d.activity),
-              values: activityData.map(
-                (d) => d.nationalBudget + d.externalBudget
-              ),
-              marker: {
-                colors: generateShades(areaColor, activityData.length),
+    <div className={classes.budgetSourceChartContainer}>
+      <p>Заглавие, което обяснява какво показва тази графика</p>
+      <div className={classes.budgetSourceContainer}>
+        <div className={classes.budgetSourceChartContainer}>
+          <YearBreakdown />
+          <Plot
+            data={[
+              {
+                labels: reordered.map((d) => d.activity),
+                values: reordered.map(
+                  (d) => d.nationalBudget + d.externalBudget
+                ),
+                marker: {
+                  colors: colors,
+                },
+                type: "pie",
+                showlegend: false,
               },
-              type: "pie",
-              showlegend: false,
-            },
-          ]}
-          layout={{ width: 460, height: 480 }}
-        />
+            ]}
+            layout={{ width: 460, height: 480 }}
+          />
+        </div>
+        <div className={classes.budgetSourceLegend}>
+          { reordered.map((activityData, idx) => (
+            <div className={classes.budgetSourceEntry}>
+              <div
+                className={classes.budgetSourceLogo}
+                style={{
+                  backgroundColor: colors[idx],
+                }}
+              />
+              <div>{activityData.activity}</div>
+            </div>
+          )) }
+        </div>
       </div>
-      {/* <AreaLegend activityData={activityData}></AreaLegend> */}
     </div>
   );
 };
