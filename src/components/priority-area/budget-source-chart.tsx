@@ -89,6 +89,7 @@ const BudgetSourceChartComponent = ({ budgetData, area }: BudgetSourceChartProps
         <div className={classes.budgetSourceChartContainer}>
           <YearBreakdown />
           <Plot
+            config={{ displayModeBar: false }}
             data={[
               {
                 labels: reordered.map(d => getModuleName(d)),

@@ -18,7 +18,10 @@ const ActivityBudgetChart: React.FC<ActivityBudgetChartProps> = ({
   const areaColor = activityData.length
     ? getAreaTheme(activityData[0].area).primaryColor
     : "#000000";
-  const reordered = sortBy(activityData, d => -(d.externalBudget + d.nationalBudget));
+  const reordered = sortBy(
+    activityData,
+    (d) => -(d.externalBudget + d.nationalBudget)
+  );
   const colors = generateShades(areaColor, reordered.length);
   return (
     <div className={classes.budgetSourceChartContainer}>
@@ -27,6 +30,7 @@ const ActivityBudgetChart: React.FC<ActivityBudgetChartProps> = ({
         <div className={classes.budgetSourceChartContainer}>
           <YearBreakdown />
           <Plot
+            config={{ displayModeBar: false }}
             data={[
               {
                 labels: reordered.map((d) => d.activity),
@@ -44,8 +48,8 @@ const ActivityBudgetChart: React.FC<ActivityBudgetChartProps> = ({
           />
         </div>
         <div className={classes.budgetSourceLegend}>
-          { reordered.map((activityData, idx) => (
-            <div className={classes.budgetSourceEntry}>
+          {reordered.map((activityData, idx) => (
+            <div key={idx} className={classes.budgetSourceEntry}>
               <div
                 className={classes.budgetSourceLogo}
                 style={{
@@ -54,7 +58,7 @@ const ActivityBudgetChart: React.FC<ActivityBudgetChartProps> = ({
               />
               <div>{activityData.activity}</div>
             </div>
-          )) }
+          ))}
         </div>
       </div>
     </div>

@@ -89,3 +89,42 @@ export async function fetchDataPerActivity() {
     });
   });
 }
+
+export interface IndicatorData extends HasYear {
+  area: string;
+  name: string;
+  value: number;
+  euAverage: number;
+}
+
+const dataIndicatorPerAreaHeaderMapping: {[key: string]: string} = {
+  'Приоритетна област': 'area',
+  'Индикатор': 'name',
+  'Година': 'year',
+  'България': 'value',
+  'Средно за ЕС': 'euAverage',
+};
+
+export async function fetchDataPerAreaIndicator() {
+  return new Promise<IndicatorData[]>((resolve, reject) => {
+    Papa.parse(`${process.env.PUBLIC_URL}/data-indicators-per-area.csv`, {
+      download: true,
+      delimiter: '\t',
+      dynamicTyping: true,
+      skipEmptyLines: true,
+      header: true,
+      transformHeader: (header => dataIndicatorPerAreaHeaderMapping[header] || header),
+      transform: (value) => value.trim(),
+      complete: ({ errors, data }) => {
+        if (errors?.length) {
+          reject(errors);
+        } else {
+          resolve(data as IndicatorData[]);
+        }
+      },
+      error: (error) => {
+        reject(error);
+      },
+    });
+  });
+}

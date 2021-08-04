@@ -18,6 +18,7 @@ const BudgetChart: React.FC<BudgetChartProps> = ({ budgetData }) => {
       <p>Заглавие, което обяснява какво показва тази графика</p>
       <YearBreakdown/>
       <Plot
+        config={{ displayModeBar: false }}
         data={[
           {
             labels: budgetData.map(d => d.area),

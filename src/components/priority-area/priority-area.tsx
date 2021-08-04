@@ -1,16 +1,18 @@
-import { ThemeProvider } from 'react-jss';
-import { useParams } from 'react-router-dom';
-import { useStyles } from './priority-area.styles';
-import { ActivityData, ModuleData } from '../../services/data';
-import { priorityAreas } from '../../services/priority-areas';
-import { getAreaTheme } from '../../themes';
-import BudgetSourceChartComponent from './budget-source-chart';
-import { ActivityBudgetChart } from '../../activity-budget-chart';
+import { ThemeProvider } from "react-jss";
+import { useParams } from "react-router-dom";
+import { ActivityBudgetChart } from "../../activity-budget-chart";
+import { ActivityData, IndicatorData, ModuleData } from "../../services/data";
+import { priorityAreas } from "../../services/priority-areas";
+import { getAreaTheme } from "../../themes";
+import BudgetSourceChartComponent from "./budget-source-chart";
+import IndicatorChartSelector from "./indicator-chart";
+import { useStyles } from "./priority-area.styles";
 
 export type PriorityAreaProps = {
   budgetData: ModuleData[];
   activityData: ActivityData[];
-}
+  indicatorData: IndicatorData[];
+};
 
 const PriorityArea = (props: PriorityAreaProps) => {
   const params = useParams<{ id: string }>();
@@ -19,8 +21,9 @@ const PriorityArea = (props: PriorityAreaProps) => {
   const theme = getAreaTheme(area.name);
   const classes = useStyles({ theme, ...props });
 
-  const data = props.budgetData.filter(d => d.area === area.name);
-  const activityData = props.activityData.filter(d => d.area === area.name);
+  const data = props.budgetData.filter((d) => d.area === area.name);
+  const activityData = props.activityData.filter((d) => d.area === area.name);
+  const indicatorData = props.indicatorData.filter((d) => d.area === area.name);
 
   return (
     <ThemeProvider theme={theme}>
@@ -33,11 +36,12 @@ const PriorityArea = (props: PriorityAreaProps) => {
           </div>
         </div>
 
-        <BudgetSourceChartComponent area={area} budgetData={data}/>
-        <ActivityBudgetChart activityData={activityData}/>
+        <BudgetSourceChartComponent area={area} budgetData={data} />
+        <ActivityBudgetChart activityData={activityData} />
+        <IndicatorChartSelector indicatorData={indicatorData} />
       </div>
     </ThemeProvider>
   );
-}
+};
 
 export default PriorityArea;

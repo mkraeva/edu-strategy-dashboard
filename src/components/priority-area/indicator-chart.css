@@ -1,0 +1,25 @@
+.indicator-chart-container {
+  display: flex;
+  flex-direction: row;
+}
+
+.indicator-list-element {
+  background-color: #f9f9f9;
+  color: #002a41;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+.indicator-list-element-active {
+  background-color: #0678a9;
+  color: white;
+  padding-left: 5px;
+  padding-right: 5px;
+  box-shadow: 0px 10px 12px #00000029;
+}
+
+.indicator-name {
+  padding: 12px;
+  margin: 0px;
+  margin-top: 3px;
+}

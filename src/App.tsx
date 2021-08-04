@@ -7,7 +7,9 @@ import SelectedYearContext from "./selected-year-context";
 import {
   ActivityData,
   fetchDataPerActivity,
+  fetchDataPerAreaIndicator,
   fetchDataPerModule,
+  IndicatorData,
   ModuleData,
 } from "./services/data";
 
@@ -15,19 +17,26 @@ interface AppProps {}
 interface AppState {
   moduleData: ModuleData[];
   activityData: ActivityData[];
+  indicatorData: IndicatorData[];
   selectedYear: number;
 }
 
 class App extends React.Component<AppProps, AppState> {
   constructor(props: AppProps) {
     super(props);
-    this.state = { moduleData: [], activityData: [], selectedYear: 0 };
+    this.state = {
+      moduleData: [],
+      activityData: [],
+      indicatorData: [],
+      selectedYear: 0,
+    };
   }
 
   async componentDidMount() {
     try {
       const moduleData = await fetchDataPerModule();
       const activityData = await fetchDataPerActivity();
+      const indicatorData = await fetchDataPerAreaIndicator();
       let selectedYear = 0;
 
       const allYears = Array.from(
@@ -37,7 +46,7 @@ class App extends React.Component<AppProps, AppState> {
       if (allYears.length > 0) {
         selectedYear = allYears[allYears.length - 1];
       }
-      this.setState({ moduleData, activityData, selectedYear });
+      this.setState({ moduleData, activityData, indicatorData, selectedYear });
     } catch (e) {
       console.log(e);
     }
@@ -61,7 +70,7 @@ class App extends React.Component<AppProps, AppState> {
   }
 
   render() {
-    const { moduleData, activityData, selectedYear } = this.state;
+    const { moduleData, activityData, indicatorData, selectedYear } = this.state;
     const [yearModuleData, yearActivityData] = [
       this.filterByYear(moduleData),
       this.filterByYear(activityData),
@@ -80,7 +89,11 @@ class App extends React.Component<AppProps, AppState> {
               <BudgetChart budgetData={yearModuleData} />
             </Route>
             <Route path="/priority-area/:id">
-              <PriorityArea budgetData={yearModuleData} activityData={yearActivityData} />
+              <PriorityArea
+                budgetData={yearModuleData}
+                activityData={yearActivityData}
+                indicatorData={indicatorData}
+              />
             </Route>
             <Route path="/">
               <Redirect to="/all-areas" />
