@@ -47,15 +47,17 @@ const IndicatorChart = ({
       rows: 10,
     },
     yaxis: {
+      title: "Проценти",
       range: [0, 100],
       tickvals: range(0, 100, 10),
     },
     xaxis: {
+      title: "Година",
       tickvals: years,
     },
     hovermode: "y",
     legend: {
-      orientation: "h",
+      orientation: "v",
     },
     margin: {
       t: 20,
