@@ -95,6 +95,8 @@ export interface IndicatorData extends HasYear {
   name: string;
   value: number;
   euAverage: number;
+  publishingPeriod: string;
+  sourceLink: string;
 }
 
 const dataIndicatorPerAreaHeaderMapping: {[key: string]: string} = {
@@ -103,6 +105,8 @@ const dataIndicatorPerAreaHeaderMapping: {[key: string]: string} = {
   'Година': 'year',
   'България': 'value',
   'Средно за ЕС': 'euAverage',
+  'Периодичност на публикуване': 'publishingPeriod',
+  'Източник/Линк': 'sourceLink',
 };
 
 export async function fetchDataPerAreaIndicator() {

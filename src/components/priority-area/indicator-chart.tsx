@@ -1,6 +1,6 @@
-import { uniq } from "lodash";
+import { range, uniq } from "lodash";
 import { PlotData } from "plotly.js";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Plot from "react-plotly.js";
 import { IndicatorData } from "../../services/data";
 import "./indicator-chart.css";
@@ -41,15 +41,25 @@ const IndicatorChart = ({
   ];
 
   const plotLayout: Partial<Plotly.Layout> = {
-    width: 460,
-    height: 480,
+    width: 680,
+    height: 400,
+    grid: {
+      rows: 10,
+    },
     yaxis: {
       range: [0, 100],
+      tickvals: range(0, 100, 10),
     },
     xaxis: {
       tickvals: years,
     },
     hovermode: "y",
+    legend: {
+      orientation: "h",
+    },
+    margin: {
+      t: 20,
+    },
   };
 
   return (
@@ -90,6 +100,11 @@ const IndicatorListElement = ({
 interface IndicatorChartSelectorProps {
   indicatorData: IndicatorData[];
 }
+
+const indicatorListStyle: React.CSSProperties = {
+  width: 460,
+};
+
 const IndicatorChartSelector = ({
   indicatorData,
 }: IndicatorChartSelectorProps) => {
@@ -98,10 +113,23 @@ const IndicatorChartSelector = ({
   if (indicatorNames.length && !selected) {
     setSelected(indicatorNames[0]);
   }
+  const selectedItem = indicatorData.find((x) => x.name === selected);
+  console.log(selectedItem);
+
+  const sourceLinkElement = selectedItem?.sourceLink?.startsWith("http") ? (
+    <p className="indicator-source-link">
+      Източник: {" "}
+      <a href={selectedItem?.sourceLink}>{selectedItem?.sourceLink}</a>
+    </p>
+  ) : (
+    <p className="indicator-source-link">
+      Източник: {selectedItem?.sourceLink}
+    </p>
+  );
 
   return (
     <div className="indicator-chart-container">
-      <div>
+      <div style={indicatorListStyle}>
         {indicatorNames.map((name) => (
           <IndicatorListElement
             key={name}
@@ -111,7 +139,13 @@ const IndicatorChartSelector = ({
           />
         ))}
       </div>
-      <IndicatorChart indicatorData={indicatorData} selectedName={selected} />
+      <div>
+        <IndicatorChart indicatorData={indicatorData} selectedName={selected} />
+        <p className="indicator-source-link">
+          {selectedItem?.publishingPeriod}
+        </p>
+        {sourceLinkElement}
+      </div>
     </div>
   );
 };

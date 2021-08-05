@@ -23,3 +23,8 @@
   margin: 0px;
   margin-top: 3px;
 }
+
+.indicator-source-link {
+  display: block;
+  margin: 5px;
+}

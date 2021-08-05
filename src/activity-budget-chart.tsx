@@ -42,6 +42,7 @@ const ActivityBudgetChart: React.FC<ActivityBudgetChartProps> = ({
                 },
                 type: "pie",
                 showlegend: false,
+                textinfo: 'none',
               },
             ]}
             layout={{ width: 460, height: 480 }}
