@@ -10,7 +10,7 @@ const files = {
   '2020': 'totals2020.xlsx',
 }
 
-let data = [];
+let dataPerActivity = [], dataPerExpenditure = [], dataTotals = [];
 
 for (let year in files) {
   let file = files[year];
@@ -19,27 +19,65 @@ for (let year in files) {
   await workbook.xlsx.readFile(file);
   const worksheet = workbook.getWorksheet('Стойности');
 
+  let lastActivity = null;
+
   worksheet.eachRow((row, rowNumber) => {
-    let first = row.getCell(1).value;
-    let title = first?.match(/^(\d+) (.*)/);
-    if (title) {
+    let firstCell = row.getCell(1).value;
+    let titleActivity = firstCell?.match(/^(\d+) (.*)/);
+    let titleTotal = firstCell === 'ОБЩО';
+    if (titleActivity) {
+      lastActivity = `Дейност ${titleActivity[1]} "${titleActivity[2]}"`;
       for (let i = 0; i < priAreaNo; i++) {
         let nat = row.getCell(2+i*3).value, eu = row.getCell(2+(i+2)*3).value;
-        if (nat === 0 && eu === 0) continue;
-        data.push({
+        if (!nat && !eu) continue;
+        dataPerActivity.push({
           'Приоритетна област': worksheet.getCell(1,2 + i*3).value.match(/\d+: (.*)/)[1],
-          'Дейност': `Дейност ${title[1]} "${title[2]}"`,
+          'Дейност': lastActivity,
           'Година': year,
-          'Средства в лв. от националния бюджет (без национални програми)': nat,
-          'Средства от ЕС и други международни проекти и програми в лв.': eu,
+          'Средства в лв. от националния бюджет (без национални програми)': nat || 0,
+          'Средства от ЕС и други международни проекти и програми в лв.': eu || 0,
         });
-        //console.log(data[data.length-1])
+        //console.log(dataPerActivity[dataPerActivity.length-1])
       }
     }
-    //console.log('Row ' + rowNumber + ' = ' + JSON.stringify(first));
+    else if (titleTotal) {
+      for (let i = 0; i < priAreaNo; i++) {
+        let nat = row.getCell(2+i*3).value, eu = row.getCell(2+(i+2)*3).value;
+        dataTotals.push({
+          'Приоритетна област': worksheet.getCell(1,2 + i*3).value.match(/\d+: (.*)/)[1],
+          'Година': year,
+          'Средства в лв. от националния бюджет (без национални програми)': nat || 0,
+          'Средства от ЕС и други международни проекти и програми в лв.': eu || 0,
+        });
+      }
+    } else if (lastActivity && !firstCell.startsWith('Забележка')) {
+      for (let i = 0; i < priAreaNo; i++) {
+        let nat = row.getCell(2+i*3).value, eu = row.getCell(2+(i+2)*3).value;
+        if (!nat && !eu) continue;
+        dataPerExpenditure.push({
+          'Приоритетна област': worksheet.getCell(1,2 + i*3).value.match(/\d+: (.*)/)[1],
+          'Дейност': lastActivity,
+          'Перо': firstCell,
+          'Година': year,
+          'Средства в лв. от националния бюджет (без национални програми)': nat || 0,
+          'Средства от ЕС и други международни проекти и програми в лв.': eu || 0,
+        });
+      }
+    }
   });
 }
 
-fs.writeFileSync('data-per-activity-true.csv','\ufeff' + stringify(data,{
-  header: true
+fs.writeFileSync('data-per-activity-true.csv','\ufeff' + stringify(dataPerActivity,{
+  header: true,
+  delimiter: '\t',
+}), 'utf-8');
+
+fs.writeFileSync('data-totals.csv','\ufeff' + stringify(dataTotals,{
+  header: true,
+  delimiter: '\t',
+}), 'utf-8');
+
+fs.writeFileSync('data-expenditure.csv','\ufeff' + stringify(dataPerExpenditure,{
+  header: true,
+  delimiter: '\t',
 }), 'utf-8');
