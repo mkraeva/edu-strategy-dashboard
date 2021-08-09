@@ -5,7 +5,7 @@ import fs from 'fs';
 const priAreaNo = 9;
 
 const files = {
-  '2018': '',
+  '2018': 'totals2018.xlsx',
   '2019': 'totals2019.xlsx',
   '2020': 'totals2020.xlsx',
 }
