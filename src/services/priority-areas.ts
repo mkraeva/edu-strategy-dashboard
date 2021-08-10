@@ -1,3 +1,7 @@
+import packageJson from '../../package.json';
+
+const IMAGES_PREFIX = packageJson.assetsPrefix || process.env.PUBLIC_URL;
+
 export interface PriorityArea {
   id: number;
   name: string;
@@ -17,5 +21,5 @@ export const priorityAreas: PriorityArea[] = [
 ].map((area, idx) => ({
   id: idx,
   name: area,
-  logo: `${process.env.PUBLIC_URL}/area-logos/PR${idx + 1}.png`,
+  logo: `${IMAGES_PREFIX}/area-logos/PR${idx + 1}.png`,
 }));

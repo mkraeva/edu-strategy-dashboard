@@ -4,6 +4,7 @@
   "private": true,
   "homepage": "/monitoring",
   "dataFilePrefix": "/wp-content/uploads/2021/08/",
+  "assetsPrefix": "/wp-content/themes/enfold-child/",
   "dependencies": {
     "d3-color": "^1.4.1",
     "lodash": "^4.17.21",
