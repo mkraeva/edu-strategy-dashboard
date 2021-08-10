@@ -1,7 +1,7 @@
 import Papa from 'papaparse';
 import packageJson from '../../package.json';
 
-const DATA_FILE_PREFIX = packageJson.homepage || process.env.PUBLIC_URL;
+const DATA_FILE_PREFIX = packageJson.dataFilePrefix || process.env.PUBLIC_URL;
 
 export enum BudgetSourceType {
   NationalProgram = 'Национална програма',
