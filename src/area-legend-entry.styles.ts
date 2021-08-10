@@ -31,14 +31,14 @@ export const useStyles = createUseStyles((theme: AreaTheme) => {
 
       padding: '9px 18px',
 
-      color: 'white',
+      color: 'white !important',
       backgroundColor: theme.primaryColor,
       borderColor: theme.primaryColor,
       boxShadow: '0px 10px 12px #00000029',
       borderRadius: '4px',
 
       fontWeight: 'bold',
-      textDecoration: 'none',
+      textDecoration: 'none !important',
     }
   };
   return result;

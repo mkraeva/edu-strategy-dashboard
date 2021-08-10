@@ -32,7 +32,7 @@ const dataPerModuleHeaderMapping: {[key: string]: string} = {
 
 export async function fetchDataPerModule() {
   return new Promise<ModuleData[]>((resolve, reject) => {
-    Papa.parse(`${DATA_FILE_PREFIX}/data-per-module.csv`, {
+    Papa.parse(`${DATA_FILE_PREFIX}/data-per-module.csv?refresh=${Date.now()}`, {
       download: true,
       delimiter: '\t',
       dynamicTyping: true,
@@ -71,7 +71,7 @@ const dataPerActivityHeaderMapping: {[key: string]: string} = {
 
 export async function fetchDataPerActivity() {
   return new Promise<ActivityData[]>((resolve, reject) => {
-    Papa.parse(`${DATA_FILE_PREFIX}/data-per-activity.csv`, {
+    Papa.parse(`${DATA_FILE_PREFIX}/data-per-activity.csv?refresh=${Date.now()}`, {
       download: true,
       delimiter: '\t',
       dynamicTyping: true,
@@ -114,7 +114,7 @@ const dataIndicatorPerAreaHeaderMapping: {[key: string]: string} = {
 
 export async function fetchDataPerAreaIndicator() {
   return new Promise<IndicatorData[]>((resolve, reject) => {
-    Papa.parse(`${DATA_FILE_PREFIX}/data-indicators-per-area.csv`, {
+    Papa.parse(`${DATA_FILE_PREFIX}/data-indicators-per-area.csv?refresh=${Date.now()}`, {
       download: true,
       delimiter: '\t',
       dynamicTyping: true,
