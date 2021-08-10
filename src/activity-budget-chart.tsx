@@ -1,7 +1,7 @@
 import { sortBy } from "lodash";
 import React from "react";
-import Plot from "react-plotly.js";
 import { useStyles } from "./components/priority-area/budget-source-chart.styles";
+import { Plot } from "./lib/util";
 import { ActivityData } from "./services/data";
 import { generateShades, getAreaTheme } from "./themes";
 import YearBreakdown from "./year-breakdown";

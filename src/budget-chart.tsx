@@ -1,7 +1,7 @@
 import React from 'react';
-import Plot from 'react-plotly.js';
 import { AreaLegend } from './area-legend';
 import { useStyles } from './budget-chart.styles';
+import { Plot } from './lib/util';
 import { ModuleData } from './services/data';
 import { getAreaTheme } from './themes';
 import YearBreakdown from './year-breakdown';

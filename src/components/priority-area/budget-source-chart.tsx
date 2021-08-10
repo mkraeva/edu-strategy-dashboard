@@ -1,6 +1,6 @@
 import { sum } from 'lodash';
 import { useTheme } from 'react-jss';
-import Plot from 'react-plotly.js';
+import { Plot } from '../../lib/util';
 import { BudgetSourceType, ModuleData } from '../../services/data';
 import { PriorityArea } from '../../services/priority-areas';
 import { AreaTheme, generateShades } from '../../themes';

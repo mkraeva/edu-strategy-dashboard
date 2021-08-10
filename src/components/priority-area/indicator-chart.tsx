@@ -1,7 +1,7 @@
 import { range, uniq } from "lodash";
 import { PlotData } from "plotly.js";
 import { useState } from "react";
-import Plot from "react-plotly.js";
+import { Plot } from "../../lib/util";
 import { IndicatorData } from "../../services/data";
 import "./indicator-chart.css";
 

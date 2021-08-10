@@ -1,3 +1,9 @@
+import createPlotlyComponent from 'react-plotly.js/factory';
+import Plotly from 'plotly.js';
+
+export const Plot = createPlotlyComponent(Plotly);
+
+
 export function groupBy<Entity>(data: Entity[], byKey: string) {
   const result = new Map<string, Entity[]>();
   for (const entity of data) {

@@ -1,4 +1,7 @@
 import Papa from 'papaparse';
+import packageJson from '../../package.json';
+
+const DATA_FILE_PREFIX = packageJson.homepage || process.env.PUBLIC_URL;
 
 export enum BudgetSourceType {
   NationalProgram = 'Национална програма',
@@ -29,7 +32,7 @@ const dataPerModuleHeaderMapping: {[key: string]: string} = {
 
 export async function fetchDataPerModule() {
   return new Promise<ModuleData[]>((resolve, reject) => {
-    Papa.parse(`${process.env.PUBLIC_URL}/data-per-module.csv`, {
+    Papa.parse(`${DATA_FILE_PREFIX}/data-per-module.csv`, {
       download: true,
       delimiter: '\t',
       dynamicTyping: true,
@@ -68,7 +71,7 @@ const dataPerActivityHeaderMapping: {[key: string]: string} = {
 
 export async function fetchDataPerActivity() {
   return new Promise<ActivityData[]>((resolve, reject) => {
-    Papa.parse(`${process.env.PUBLIC_URL}/data-per-activity.csv`, {
+    Papa.parse(`${DATA_FILE_PREFIX}/data-per-activity.csv`, {
       download: true,
       delimiter: '\t',
       dynamicTyping: true,
@@ -111,7 +114,7 @@ const dataIndicatorPerAreaHeaderMapping: {[key: string]: string} = {
 
 export async function fetchDataPerAreaIndicator() {
   return new Promise<IndicatorData[]>((resolve, reject) => {
-    Papa.parse(`${process.env.PUBLIC_URL}/data-indicators-per-area.csv`, {
+    Papa.parse(`${DATA_FILE_PREFIX}/data-indicators-per-area.csv`, {
       download: true,
       delimiter: '\t',
       dynamicTyping: true,
