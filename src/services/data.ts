@@ -23,7 +23,7 @@ export interface ModuleData extends HasYear {
 
 const dataPerModuleHeaderMapping: {[key: string]: string} = {
   'Приоритетна област': 'area',
-  'Дейност': 'program',
+  'Програма': 'program',
   'Модул': 'module',
   'Вид': 'type',
   'Средства': 'budget',
