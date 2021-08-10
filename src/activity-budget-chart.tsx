@@ -10,6 +10,11 @@ type ActivityBudgetChartProps = {
   activityData: ActivityData[];
 };
 
+const FixedColors = {
+  nationalBudget: '#FAB316',
+  externalBudget: '#0678A9'
+};
+
 const ActivityBudgetChart: React.FC<ActivityBudgetChartProps> = ({
   activityData,
 }) => {
@@ -25,7 +30,10 @@ const ActivityBudgetChart: React.FC<ActivityBudgetChartProps> = ({
   const colors = generateShades(areaColor, reordered.length);
   return (
     <div className={classes.budgetSourceChartContainer}>
-      <p>Заглавие, което обяснява какво показва тази графика</p>
+      <h2 className="chart-title">
+        Графиката показва разпределението на средствата по различните пера и
+        дейности, финансирани в образователната система
+      </h2>
       <div className={classes.budgetSourceContainer}>
         <div className={classes.budgetSourceChartContainer}>
           <YearBreakdown />
@@ -42,7 +50,7 @@ const ActivityBudgetChart: React.FC<ActivityBudgetChartProps> = ({
                 },
                 type: "pie",
                 showlegend: false,
-                textinfo: 'none',
+                textinfo: "none",
               },
             ]}
             layout={{ width: 460, height: 480 }}
@@ -57,10 +65,128 @@ const ActivityBudgetChart: React.FC<ActivityBudgetChartProps> = ({
                   backgroundColor: colors[idx],
                 }}
               />
-              <div>{activityData.activity}</div>
+              <div><p style={{marginTop: 0}}>{activityData.activity}</p>
+                <Plot
+                  config={{ displayModeBar: false }}
+                  data={[
+                    {
+                      y: [activityData.activity],
+                      x: [
+                        (activityData.nationalBudget /
+                          (activityData.nationalBudget +
+                            activityData.externalBudget)) *
+                          100,
+                      ],
+                      width: 0.25,
+                      hoverinfo: "y",
+                      marker: {
+                        color: FixedColors.nationalBudget
+                      },
+                      type: "bar",
+                      orientation: "h",
+                      labels: [],
+                      name: "Средства от националния бюджет (%)",
+                    },
+                    {
+                      y: [activityData.activity],
+                      x: [
+                        (activityData.externalBudget /
+                          (activityData.nationalBudget +
+                            activityData.externalBudget)) *
+                          100,
+                      ],
+                      width: 0.25,
+                      hoverinfo: "y",
+                      marker: {
+                        color: FixedColors.externalBudget
+                      },
+                      type: "bar",
+                      orientation: "h",
+                      labels: [],
+                      name: "Средства от ЕС и други международни проекти и програми (%)",
+                    },
+                  ]}
+                  layout={{
+                    legend:{ orientation: 'h' },
+                    margin: {
+                      t: 0,
+                      l: 0,
+                    },
+                    yaxis: {
+                      tickvals: [],
+                      showgrid: false
+                    },
+                    xaxis: {
+                      range: [0, 100],
+                      showgrid: false
+                    },
+                    width: 560,
+                    height: 100,
+                    barmode: "stack",
+                  }}
+                />
+              </div>
             </div>
           ))}
         </div>
+      </div>
+      <div>
+        <Plot
+          config={{ displayModeBar: false }}
+          data={[
+            {
+              y: activityData.map((a) => a.activity),
+              x: activityData.map(
+                (a) =>
+                  (a.nationalBudget / (a.nationalBudget + a.externalBudget)) *
+                  100
+              ),
+              width: 0.4,
+              hoverinfo: "y",
+              marker: {
+                color: FixedColors.nationalBudget,
+              },
+              type: "bar",
+              orientation: "h",
+              labels: [],
+              name: "Средства от националния бюджет (%)",
+            },
+            {
+              y: activityData.map((a) => a.activity),
+              x: activityData.map(
+                (a) =>
+                  (a.externalBudget / (a.nationalBudget + a.externalBudget)) *
+                  100
+              ),
+              width: 0.4,
+              hoverinfo: "y",
+              marker: {
+                color: FixedColors.externalBudget,
+              },
+              type: "bar",
+              orientation: "h",
+              labels: [],
+              name: "Средства от ЕС и други международни проекти и програми (%)",
+            },
+          ]}
+          layout={{
+            margin: {
+              t: 0,
+            },
+            legend: {
+              orientation: 'h'
+            },
+            yaxis: {
+              tickvals: [],
+            },
+            xaxis: {
+              range: [0, 100],
+            },
+            width: 1080,
+            height: 300,
+            barmode: "stack",
+          }}
+        />
       </div>
     </div>
   );

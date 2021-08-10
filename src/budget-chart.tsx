@@ -15,7 +15,7 @@ const BudgetChart: React.FC<BudgetChartProps> = ({ budgetData }) => {
   return (
     <div className={classes.budgetChartContainer}>
       <div className={classes.budgetChartChartContainer}>
-      <p>Заглавие, което обяснява какво показва тази графика</p>
+      <h2 className="chart-title">Изразходвани средства по приоритетна област (на годишна база)</h2>
       <YearBreakdown/>
       <Plot
         config={{ displayModeBar: false }}

@@ -8,8 +8,6 @@ export const useStyles = createUseStyles((theme: AreaTheme) => {
     budgetSourceContainer: {
       display: 'flex',
       flexDirection: 'row',
-
-      marginTop: '50px',
     },
     budgetSourceChartContainer: {
       display: 'flex',

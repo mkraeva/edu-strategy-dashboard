@@ -4,3 +4,9 @@
   margin: 100px;
   max-width: 1200px;
 }
+
+.chart-title {
+  color: #002a41;
+  font-weight: bold;
+  font-size: 20px;
+}

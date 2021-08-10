@@ -120,7 +120,7 @@ const IndicatorChartSelector = ({
 
   const sourceLinkElement = selectedItem?.sourceLink?.startsWith("http") ? (
     <p className="indicator-source-link">
-      Източник: {" "}
+      Източник:{" "}
       <a href={selectedItem?.sourceLink}>{selectedItem?.sourceLink}</a>
     </p>
   ) : (
@@ -130,23 +130,29 @@ const IndicatorChartSelector = ({
   );
 
   return (
-    <div className="indicator-chart-container">
-      <div style={indicatorListStyle}>
-        {indicatorNames.map((name) => (
-          <IndicatorListElement
-            key={name}
-            name={name}
-            setSelected={setSelected}
-            isSelected={selected === name}
+    <div>
+      <h2 className="chart-title">Движение на ключовите индикатори в приоритетната област</h2>
+      <div className="indicator-chart-container">
+        <div style={indicatorListStyle}>
+          {indicatorNames.map((name) => (
+            <IndicatorListElement
+              key={name}
+              name={name}
+              setSelected={setSelected}
+              isSelected={selected === name}
+            />
+          ))}
+        </div>
+        <div>
+          <IndicatorChart
+            indicatorData={indicatorData}
+            selectedName={selected}
           />
-        ))}
-      </div>
-      <div>
-        <IndicatorChart indicatorData={indicatorData} selectedName={selected} />
-        <p className="indicator-source-link">
-          {selectedItem?.publishingPeriod}
-        </p>
-        {sourceLinkElement}
+          <p className="indicator-source-link">
+            {selectedItem?.publishingPeriod}
+          </p>
+          {sourceLinkElement}
+        </div>
       </div>
     </div>
   );
