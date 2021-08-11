@@ -65,7 +65,7 @@ const dataPerActivityHeaderMapping: {[key: string]: string} = {
   'Приоритетна област': 'area',
   'Дейност': 'activity',
   'Година': 'year',
-  'Средства в лв. от националния бюджет': 'nationalBudget',
+  'Средства в лв. от националния бюджет (без национални програми)': 'nationalBudget',
   'Средства от ЕС и други международни проекти и програми в лв.': 'externalBudget',
 };
 
