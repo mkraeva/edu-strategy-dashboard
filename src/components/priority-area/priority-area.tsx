@@ -1,7 +1,7 @@
 import { ThemeProvider } from "react-jss";
 import { useParams } from "react-router-dom";
 import { ActivityBudgetChart } from "../../activity-budget-chart";
-import { ActivityData, IndicatorData, ModuleData } from "../../services/data";
+import { ActivityData, ExpenditureData, IndicatorData, ModuleData } from "../../services/data";
 import { priorityAreas } from "../../services/priority-areas";
 import { getAreaTheme } from "../../themes";
 import BudgetSourceChartComponent from "./budget-source-chart";
@@ -11,6 +11,7 @@ import { useStyles } from "./priority-area.styles";
 export type PriorityAreaProps = {
   budgetData: ModuleData[];
   activityData: ActivityData[];
+  expenditureData: ExpenditureData[];
   indicatorData: IndicatorData[];
 };
 
@@ -24,6 +25,7 @@ const PriorityArea = (props: PriorityAreaProps) => {
   const data = props.budgetData.filter((d) => d.area === area.name);
   const activityData = props.activityData.filter((d) => d.area === area.name);
   const indicatorData = props.indicatorData.filter((d) => d.area === area.name);
+  const expenditureData = props.expenditureData.filter(d => d.area === area.name);
 
   return (
     <ThemeProvider theme={theme}>
@@ -37,7 +39,7 @@ const PriorityArea = (props: PriorityAreaProps) => {
         </div>
 
         <BudgetSourceChartComponent area={area} budgetData={data} />
-        <ActivityBudgetChart activityData={activityData} />
+        <ActivityBudgetChart activityData={activityData} expenditureData={expenditureData} />
         <IndicatorChartSelector indicatorData={indicatorData} />
       </div>
     </ThemeProvider>

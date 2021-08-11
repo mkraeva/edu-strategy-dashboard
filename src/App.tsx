@@ -6,9 +6,11 @@ import PriorityArea from "./components/priority-area/priority-area";
 import SelectedYearContext from "./selected-year-context";
 import {
   ActivityData,
+  ExpenditureData,
   fetchDataPerActivity,
   fetchDataPerAreaIndicator,
   fetchDataPerModule,
+  fetchExpenditureData,
   IndicatorData,
   ModuleData,
 } from "./services/data";
@@ -18,6 +20,7 @@ interface AppState {
   moduleData: ModuleData[];
   activityData: ActivityData[];
   indicatorData: IndicatorData[];
+  expenditureData: ExpenditureData[];
   selectedYear: number;
 }
 
@@ -28,6 +31,7 @@ class App extends React.Component<AppProps, AppState> {
       moduleData: [],
       activityData: [],
       indicatorData: [],
+      expenditureData: [],
       selectedYear: 0,
     };
   }
@@ -37,6 +41,7 @@ class App extends React.Component<AppProps, AppState> {
       const moduleData = await fetchDataPerModule();
       const activityData = await fetchDataPerActivity();
       const indicatorData = await fetchDataPerAreaIndicator();
+      const expenditureData = await fetchExpenditureData();
       let selectedYear = 0;
 
       const allYears = Array.from(
@@ -46,9 +51,9 @@ class App extends React.Component<AppProps, AppState> {
       if (allYears.length > 0) {
         selectedYear = allYears[allYears.length - 1];
       }
-      this.setState({ moduleData, activityData, indicatorData, selectedYear });
+      this.setState({ moduleData, activityData, indicatorData, expenditureData, selectedYear });
     } catch (e) {
-      console.log(e);
+      console.error(e);
     }
   }
 
@@ -70,10 +75,11 @@ class App extends React.Component<AppProps, AppState> {
   }
 
   render() {
-    const { moduleData, activityData, indicatorData, selectedYear } = this.state;
-    const [yearModuleData, yearActivityData] = [
+    const { moduleData, activityData, expenditureData, indicatorData, selectedYear } = this.state;
+    const [yearModuleData, yearActivityData, yearExpenditureData] = [
       this.filterByYear(moduleData),
       this.filterByYear(activityData),
+      this.filterByYear(expenditureData),
     ];
     return (
       <SelectedYearContext.Provider
@@ -88,10 +94,11 @@ class App extends React.Component<AppProps, AppState> {
             <Route path="/all-areas">
               <BudgetChart budgetData={yearModuleData} />
             </Route>
-            <Route path="/priority-area/:id">
+            <Route path="/priority-area/:id/:activity?">
               <PriorityArea
                 budgetData={yearModuleData}
                 activityData={yearActivityData}
+                expenditureData={yearExpenditureData}
                 indicatorData={indicatorData}
               />
             </Route>

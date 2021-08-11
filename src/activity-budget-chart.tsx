@@ -1,13 +1,16 @@
 import { sortBy } from "lodash";
+import { relative } from "path";
 import React from "react";
+import { Link, useRouteMatch } from "react-router-dom";
 import { useStyles } from "./components/priority-area/budget-source-chart.styles";
 import { Plot } from "./lib/util";
-import { ActivityData } from "./services/data";
+import { ActivityData, ExpenditureData } from "./services/data";
 import { generateShades, getAreaTheme } from "./themes";
 import YearBreakdown from "./year-breakdown";
 
 type ActivityBudgetChartProps = {
   activityData: ActivityData[];
+  expenditureData: ExpenditureData[];
 };
 
 const FixedColors = {
@@ -15,13 +18,72 @@ const FixedColors = {
   externalBudget: '#0678A9'
 };
 
+const ActivityExpenditure: React.FC<{ expenditureData: ExpenditureData[] }> = ({ expenditureData }) => {
+  return (
+    <div>
+      <Plot
+        data={[
+          {
+            y: expenditureData.map((a) => a.expenseType),
+            x: expenditureData.map(
+              (a) => a.nationalBudget
+            ),
+            labels: expenditureData.map(e => e.expenseType),
+            width: 0.4,
+            hoverinfo: "text",
+            marker: {
+              color: FixedColors.nationalBudget,
+            },
+            type: "bar",
+            orientation: "h",
+            name: "Средства от националния бюджет (%)",
+          },
+          {
+            y: expenditureData.map((a) => a.expenseType),
+            x: expenditureData.map(
+              (a) => a.externalBudget),
+            labels: expenditureData.map(e => e.expenseType),
+            width: 0.4,
+            textinfo: "none",
+            hoverinfo: "text",
+            marker: {
+              color: FixedColors.externalBudget,
+            },
+            type: "bar",
+            orientation: "h",
+            name: "Средства от ЕС и други международни проекти и програми (%)",
+          },
+        ]}
+        layout={{
+          margin: {
+            t: 0,
+          },
+          legend: {
+            orientation: 'h'
+          },
+          yaxis: {
+            tickvals: [],
+          },
+          height: 300,
+          barmode: "stack",
+        }}
+      />
+    </div>
+  );
+};
+interface RouterMatch {
+  id: string; // priority area id
+  activity?: string; // selected activity
+}
 const ActivityBudgetChart: React.FC<ActivityBudgetChartProps> = ({
-  activityData,
+  activityData, expenditureData
 }) => {
+  const { url, params: { activity } } = useRouteMatch<RouterMatch>();
   activityData.sort((a, b) => (a.nationalBudget < b.nationalBudget ? 1 : -1));
+  const areaName = activityData[0]?.area;
   const classes = useStyles();
   const areaColor = activityData.length
-    ? getAreaTheme(activityData[0].area).primaryColor
+    ? getAreaTheme(areaName).primaryColor
     : "#000000";
   const reordered = sortBy(
     activityData,
@@ -65,38 +127,33 @@ const ActivityBudgetChart: React.FC<ActivityBudgetChartProps> = ({
                   backgroundColor: colors[idx],
                 }}
               />
-              <div><p style={{marginTop: 0}}>{activityData.activity}</p>
+              <div>
+                <Link
+                  to={`${url}/${activityData.activity}`}
+                >
+                  {activityData.activity}
+                </Link>
                 <Plot
                   config={{ displayModeBar: false }}
                   data={[
                     {
                       y: [activityData.activity],
-                      x: [
-                        (activityData.nationalBudget /
-                          (activityData.nationalBudget +
-                            activityData.externalBudget)) *
-                          100,
-                      ],
+                      x: [activityData.nationalBudget],
+                      hoverinfo: "x",
                       width: 0.25,
-                      hoverinfo: "y",
                       marker: {
                         color: FixedColors.nationalBudget
                       },
                       type: "bar",
                       orientation: "h",
-                      labels: [],
+                      // text: [`${activityData.nationalBudget} лв.`],
                       name: "Средства от националния бюджет (%)",
                     },
                     {
                       y: [activityData.activity],
-                      x: [
-                        (activityData.externalBudget /
-                          (activityData.nationalBudget +
-                            activityData.externalBudget)) *
-                          100,
-                      ],
+                      x: [activityData.externalBudget],
+                      hoverinfo: "x",
                       width: 0.25,
-                      hoverinfo: "y",
                       marker: {
                         color: FixedColors.externalBudget
                       },
@@ -123,6 +180,7 @@ const ActivityBudgetChart: React.FC<ActivityBudgetChartProps> = ({
                     width: 560,
                     height: 100,
                     barmode: "stack",
+                    barnorm: "percent",
                   }}
                 />
               </div>
@@ -130,64 +188,9 @@ const ActivityBudgetChart: React.FC<ActivityBudgetChartProps> = ({
           ))}
         </div>
       </div>
-      <div>
-        <Plot
-          config={{ displayModeBar: false }}
-          data={[
-            {
-              y: activityData.map((a) => a.activity),
-              x: activityData.map(
-                (a) =>
-                  (a.nationalBudget / (a.nationalBudget + a.externalBudget)) *
-                  100
-              ),
-              width: 0.4,
-              hoverinfo: "y",
-              marker: {
-                color: FixedColors.nationalBudget,
-              },
-              type: "bar",
-              orientation: "h",
-              labels: [],
-              name: "Средства от националния бюджет (%)",
-            },
-            {
-              y: activityData.map((a) => a.activity),
-              x: activityData.map(
-                (a) =>
-                  (a.externalBudget / (a.nationalBudget + a.externalBudget)) *
-                  100
-              ),
-              width: 0.4,
-              hoverinfo: "y",
-              marker: {
-                color: FixedColors.externalBudget,
-              },
-              type: "bar",
-              orientation: "h",
-              labels: [],
-              name: "Средства от ЕС и други международни проекти и програми (%)",
-            },
-          ]}
-          layout={{
-            margin: {
-              t: 0,
-            },
-            legend: {
-              orientation: 'h'
-            },
-            yaxis: {
-              tickvals: [],
-            },
-            xaxis: {
-              range: [0, 100],
-            },
-            width: 1080,
-            height: 300,
-            barmode: "stack",
-          }}
-        />
-      </div>
+      {!!activity && <ActivityExpenditure 
+        expenditureData={expenditureData.filter(d => d.area === areaName && d.activity === activity)}
+      />}
     </div>
   );
 };

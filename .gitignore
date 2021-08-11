@@ -24,4 +24,5 @@ yarn-error.log*
 public/data-per-module.csv
 public/data-per-activity.csv
 public/data-indicators-per-area.csv
+public/data-expenditure.csv
 public/wp-content

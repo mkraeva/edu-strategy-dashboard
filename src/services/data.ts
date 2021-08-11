@@ -135,3 +135,44 @@ export async function fetchDataPerAreaIndicator() {
     });
   });
 }
+
+export interface ExpenditureData extends HasYear {
+  area: string;
+  activity: string;
+  expenseType: string;
+  nationalBudget: number;
+  externalBudget: number;
+}
+
+const expenditureHeaderMapping: {[key: string]: string} = {
+  'Приоритетна област': 'area',
+  'Дейност': 'activity',
+  'Перо': 'expenseType',
+  'Година': 'year',
+  'Средства в лв. от националния бюджет (без национални програми)': 'nationalBudget',
+  'Средства от ЕС и други международни проекти и програми в лв.': 'externalBudget',
+};
+
+export async function fetchExpenditureData() {
+  return new Promise<ExpenditureData[]>((resolve, reject) => {
+    Papa.parse(`${DATA_FILE_PREFIX}/data-expenditure.csv?refresh=${Date.now()}`, {
+      download: true,
+      delimiter: '\t',
+      dynamicTyping: true,
+      skipEmptyLines: true,
+      header: true,
+      transformHeader: (header => expenditureHeaderMapping[header] || header),
+      transform: (value) => value.trim(),
+      complete: ({ errors, data }) => {
+        if (errors?.length) {
+          reject(errors);
+        } else {
+          resolve(data as ExpenditureData[]);
+        }
+      },
+      error: (error) => {
+        reject(error);
+      },
+    });
+  });
+}
