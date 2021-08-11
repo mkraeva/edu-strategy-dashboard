@@ -84,7 +84,10 @@ const BudgetSourceChartComponent = ({ budgetData, area }: BudgetSourceChartProps
 
   return (
     <div className={classes.budgetSourceChartContainer}>
-      <p>Заглавие, което обяснява какво показва тази графика</p>
+      <h2 className="chart-title">
+        Източници на финансиране в тази приоритетна област
+      </h2>
+      <p>Графиката показва разпределението на средствата по източниците на финансиране: национални програми, проекти с финансиране от ЕС или друга международна програма, както и средства от националния бюджет извън националните програми</p>
       <div className={classes.budgetSourceContainer}>
         <div className={classes.budgetSourceChartContainer}>
           <YearBreakdown />

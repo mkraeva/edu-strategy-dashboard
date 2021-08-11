@@ -31,9 +31,9 @@ const ActivityBudgetChart: React.FC<ActivityBudgetChartProps> = ({
   return (
     <div className={classes.budgetSourceChartContainer}>
       <h2 className="chart-title">
-        Графиката показва разпределението на средствата по различните пера и
-        дейности, финансирани в образователната система
+        Разпределение на средствата по дейности в рамките на приоритетната област
       </h2>
+      <p>Графиките показват разпределението на средствата по различните пера и дейности, финансирани в образователната система</p>
       <div className={classes.budgetSourceContainer}>
         <div className={classes.budgetSourceChartContainer}>
           <YearBreakdown />
