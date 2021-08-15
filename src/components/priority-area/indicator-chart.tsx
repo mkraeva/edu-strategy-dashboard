@@ -62,7 +62,7 @@ const IndicatorChart = ({
       mode: "lines+markers",
       name: "България",
       line: {
-        color: "red",
+        color: "#636EFA",
       },
     },
     {
@@ -71,7 +71,7 @@ const IndicatorChart = ({
       mode: "lines+markers",
       name: "Средно за ЕС",
       line: {
-        color: "blue",
+        color: "#EF553B",
       },
     },
     {
@@ -79,8 +79,11 @@ const IndicatorChart = ({
       y: targetValues,
       mode: "lines+markers",
       name: `Целева стойност ${targetYears[0]}`,
+      marker: {
+        size: 15
+      },
       line: {
-        color: "green"
+        color: "#27C42C"
       }
     }
   ];
