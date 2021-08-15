@@ -10,6 +10,36 @@ interface IndicatorChartProps {
   selectedName: String;
 }
 
+const IndicatorBoard = ({
+  indicatorData,
+  selectedName,
+}: IndicatorChartProps) => {
+  const currentYear = new Date().getFullYear();
+  const records = indicatorData.filter((d) => d.name === selectedName);
+  const year = Math.max(...records.map((d) => d.year).filter((y) => y <= currentYear));
+  const value = records?.find((d) => d.year === year)?.value;
+  const euAverage = records?.find((d) => d.year === year)?.euAverage;
+
+  return (
+    <div className="indicator-main-area">
+      <div>
+        <p className="indicator-current-value">{value}</p>
+        През {year} г.
+        {euAverage &&
+          <>
+            <p className="indicator-current-eu">{euAverage}</p>
+            Средно за ЕС
+          </>
+        }
+      </div>
+      <div>
+        <p className="indicator-target-value">%</p>
+        Цел за {""} г.
+      </div>
+    </div>
+  );
+}
+
 const IndicatorChart = ({
   indicatorData,
   selectedName,
@@ -101,14 +131,12 @@ const IndicatorListElement = ({
 
 interface IndicatorChartSelectorProps {
   indicatorData: IndicatorData[];
+  mainArea: Boolean;
 }
-
-const indicatorListStyle: React.CSSProperties = {
-  width: 460,
-};
 
 const IndicatorChartSelector = ({
   indicatorData,
+  mainArea,
 }: IndicatorChartSelectorProps) => {
   const indicatorNames = uniq(indicatorData.map((d) => d.name)).sort();
   const [selected, setSelected] = useState("");
@@ -116,7 +144,7 @@ const IndicatorChartSelector = ({
     setSelected(indicatorNames[0]);
   }
   const selectedItem = indicatorData.find((x) => x.name === selected);
-  console.log(selectedItem);
+  // console.log(selectedItem);
 
   const sourceLinkElement = selectedItem?.sourceLink?.startsWith("http") ? (
     <p className="indicator-source-link">
@@ -129,11 +157,26 @@ const IndicatorChartSelector = ({
     </p>
   );
 
+  const title = mainArea ? "Ключови индикатори в стратегическата рамка и техните стойности" : "Движение на ключовите индикатори в приоритетната област";
+  const presentation = mainArea ?
+    (
+      <IndicatorBoard
+        indicatorData={indicatorData}
+        selectedName={selected}
+      />
+    ) :
+    (
+      <IndicatorChart
+        indicatorData={indicatorData}
+        selectedName={selected}
+      />
+    );
+
   return (
     <div>
-      <h2 className="chart-title">Движение на ключовите индикатори в приоритетната област</h2>
+      <h2 className="chart-title">{title}</h2>
       <div className="indicator-chart-container">
-        <div style={indicatorListStyle}>
+        <div className="indicator-list">
           {indicatorNames.map((name) => (
             <IndicatorListElement
               key={name}
@@ -143,11 +186,8 @@ const IndicatorChartSelector = ({
             />
           ))}
         </div>
-        <div>
-          <IndicatorChart
-            indicatorData={indicatorData}
-            selectedName={selected}
-          />
+        <div className="indicator-body">
+          {presentation}
           <p className="indicator-source-link">
             {selectedItem?.publishingPeriod}
           </p>

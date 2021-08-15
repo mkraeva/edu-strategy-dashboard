@@ -40,7 +40,7 @@ const PriorityArea = (props: PriorityAreaProps) => {
 
         <BudgetSourceChartComponent area={area} budgetData={data} />
         <ActivityBudgetChart activityData={activityData} expenditureData={expenditureData} />
-        <IndicatorChartSelector indicatorData={indicatorData} />
+        <IndicatorChartSelector indicatorData={indicatorData} mainArea={false} />
       </div>
     </ThemeProvider>
   );

@@ -3,6 +3,7 @@ import { Redirect, Route, Switch } from "react-router-dom";
 import "./App.css";
 import { BudgetChart } from "./budget-chart";
 import PriorityArea from "./components/priority-area/priority-area";
+import IndicatorChartSelector from "./components/priority-area/indicator-chart";
 import SelectedYearContext from "./selected-year-context";
 import {
   ActivityData,
@@ -93,6 +94,7 @@ class App extends React.Component<AppProps, AppState> {
           <Switch>
             <Route path="/all-areas">
               <BudgetChart budgetData={yearModuleData} />
+              <IndicatorChartSelector indicatorData={indicatorData} mainArea={true} />
             </Route>
             <Route path="/priority-area/:id/:activity?">
               <PriorityArea

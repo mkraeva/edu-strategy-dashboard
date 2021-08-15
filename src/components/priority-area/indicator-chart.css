@@ -3,11 +3,18 @@
   flex-direction: row;
 }
 
+.indicator-list {
+  width: 460px;
+  height: 400px;
+  overflow-y:  auto;
+}
+
 .indicator-list-element {
   background-color: #f9f9f9;
   color: #002a41;
   padding-left: 5px;
   padding-right: 5px;
+  cursor:  pointer;
 }
 
 .indicator-list-element-active {
@@ -16,6 +23,47 @@
   padding-left: 5px;
   padding-right: 5px;
   box-shadow: 0px 10px 12px #00000029;
+}
+
+.indicator-body {
+  height: 400px;
+  display: flex;
+  flex-direction: column;
+  padding: 2em;
+  flex-grow: 1;
+}
+
+.indicator-main-area {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  flex-grow: 1;
+  align-items: center;
+}
+
+.indicator-main-area div {
+  text-align: center;
+  width: 50%;
+  border-right: 0.5px solid lightgray;
+}
+
+.indicator-current-value {
+  font-weight: bold;
+  color: #0678a9;
+  margin-bottom: 0;
+  font-size: 4em;
+}
+
+.indicator-current-eu {
+  font-weight: bold;
+  color: #002a41;
+  font-size: 2em;
+  margin-bottom: 0;
+}
+
+.indicator-target-value {
+  font-size: 4em;
+  margin-bottom: 0;
 }
 
 .indicator-name {
@@ -27,4 +75,5 @@
 .indicator-source-link {
   display: block;
   margin: 5px;
+  font-size: smaller;
 }
