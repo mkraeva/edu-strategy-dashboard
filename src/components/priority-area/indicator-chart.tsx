@@ -68,6 +68,7 @@ const IndicatorChart = ({
       line: {
         color: "#636EFA",
       },
+      hoverinfo: "y",
     },
     {
       x: years,
@@ -77,6 +78,7 @@ const IndicatorChart = ({
       line: {
         color: "#EF553B",
       },
+      hoverinfo: "y",
     },
     {
       x: targetYears,
@@ -88,7 +90,8 @@ const IndicatorChart = ({
       },
       line: {
         color: "#27C42C"
-      }
+      },
+      hoverinfo: "y",
     }
   ];
 
@@ -99,9 +102,9 @@ const IndicatorChart = ({
       rows: 10,
     },
     yaxis: {
-      title: "Проценти",
-      range: [0, 100],
-      tickvals: range(0, 100, 10),
+      title: "Стойност",
+      // range: [0, 100],
+      // tickvals: range(0, 100, 10),
     },
     xaxis: {
       title: "Година",
