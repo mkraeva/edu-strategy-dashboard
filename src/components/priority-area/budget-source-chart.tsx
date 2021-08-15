@@ -7,6 +7,7 @@ import { AreaTheme, generateShades } from '../../themes';
 import YearBreakdown from '../../year-breakdown';
 import { useStyles } from './budget-source-chart.styles';
 import { CHART_HEIGHT, CHART_WIDTH } from './common.styles';
+import NumberFormat from 'react-number-format';
 
 type BudgetSourceChartProps = {
   area: PriorityArea;
@@ -49,7 +50,18 @@ const BudgetSourceEntryComponent = ({ moduleData, totalBudget, color }: { module
             { moduleData.module }
           </div>
         )}
-        <div>{pct}% - {moduleData.budget}лв</div>
+        <div>
+          <NumberFormat
+            value={moduleData.budget}
+            thousandSeparator={true}
+            suffix=" лв."
+            displayType="text"
+          />
+          &nbsp;<span style={{
+            backgroundColor: `${color}55`,
+            padding: '0 3px 3px'
+          }}>[{pct}%]</span>
+        </div>
       </div>
     </div>
   )
