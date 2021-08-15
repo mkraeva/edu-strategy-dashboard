@@ -20,6 +20,10 @@ const IndicatorBoard = ({
   const value = records?.find((d) => d.year === year)?.value;
   const euAverage = records?.find((d) => d.year === year)?.euAverage;
 
+  const targetRecord = records?.find((d) => d.isTarget);
+  const targetYear = targetRecord?.year;
+  const targetValue = targetRecord?.value;
+
   return (
     <div className="indicator-main-area">
       <div>
@@ -33,8 +37,8 @@ const IndicatorBoard = ({
         }
       </div>
       <div>
-        <p className="indicator-target-value">%</p>
-        Цел за {""} г.
+        <p className="indicator-target-value">{targetValue}</p>
+        Цел за {targetYear} г.
       </div>
     </div>
   );
