@@ -1,8 +1,9 @@
-import { range, uniq } from "lodash";
+import { range, uniqBy } from "lodash";
 import { PlotData } from "plotly.js";
 import { useState } from "react";
 import { Plot } from "../../lib/util";
 import { IndicatorData } from "../../services/data";
+import { getAreaTheme } from '../../themes';
 import "./indicator-chart.css";
 
 interface IndicatorChartProps {
@@ -24,10 +25,12 @@ const IndicatorBoard = ({
   const targetYear = targetRecord?.year;
   const targetValue = targetRecord?.value;
 
+  const color = getAreaTheme(records[0]?.area)?.primaryColor;
+
   return (
     <div className="indicator-main-area">
       <div>
-        <p className="indicator-current-value">{value}</p>
+        <p className="indicator-current-value" style={{color: color}}>{value}</p>
         През {year} г.
         {euAverage &&
           <>
@@ -37,8 +40,12 @@ const IndicatorBoard = ({
         }
       </div>
       <div>
-        <p className="indicator-target-value">{targetValue}</p>
-        Цел за {targetYear} г.
+        {targetValue &&
+          <>
+            <p className="indicator-target-value">{targetValue}</p>
+            Цел за {targetYear} г.
+          </>
+        }
       </div>
     </div>
   );
@@ -134,18 +141,23 @@ interface IndicatorListElementProps {
   name: string;
   setSelected: (x: string) => void;
   isSelected: boolean;
+  color: string;
 }
 
 const IndicatorListElement = ({
   name,
   setSelected,
   isSelected,
+  color
 }: IndicatorListElementProps) => {
   return (
     <div
       className={
         isSelected ? "indicator-list-element-active" : "indicator-list-element"
       }
+      style={{
+        backgroundColor: `${color}55`
+      }}
     >
       <p className="indicator-name" onClick={() => setSelected(name)}>
         {name}
@@ -156,17 +168,20 @@ const IndicatorListElement = ({
 
 interface IndicatorChartSelectorProps {
   indicatorData: IndicatorData[];
-  mainArea: Boolean;
+  mainArea: boolean;
 }
 
 const IndicatorChartSelector = ({
   indicatorData,
   mainArea,
 }: IndicatorChartSelectorProps) => {
-  const indicatorNames = uniq(indicatorData.map((d) => d.name)).sort();
+  const indicators = uniqBy(indicatorData, 'name').sort((a, b) => {
+    if (a.area === b.area) return a.name.localeCompare(b.name);
+    else return a.area.localeCompare(b.area);
+  });
   const [selected, setSelected] = useState("");
-  if (indicatorNames.length && !selected) {
-    setSelected(indicatorNames[0]);
+  if (indicators.length && !selected) {
+    setSelected(indicators[0].name);
   }
   const selectedItem = indicatorData.find((x) => x.name === selected);
   // console.log(selectedItem);
@@ -202,12 +217,13 @@ const IndicatorChartSelector = ({
       <h2 className="chart-title">{title}</h2>
       <div className="indicator-chart-container">
         <div className="indicator-list">
-          {indicatorNames.map((name) => (
+          {indicators.map((i) => (
             <IndicatorListElement
-              key={name}
-              name={name}
+              key={i.name}
+              name={i.name}
+              color={getAreaTheme(i.area).primaryColor}
               setSelected={setSelected}
-              isSelected={selected === name}
+              isSelected={selected === i.name}
             />
           ))}
         </div>
