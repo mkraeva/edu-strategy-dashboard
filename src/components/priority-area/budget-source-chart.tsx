@@ -5,7 +5,8 @@ import { BudgetSourceType, ModuleData } from '../../services/data';
 import { PriorityArea } from '../../services/priority-areas';
 import { AreaTheme, generateShades } from '../../themes';
 import YearBreakdown from '../../year-breakdown';
-import { CHART_HEIGHT, CHART_WIDTH, useStyles } from './budget-source-chart.styles';
+import { useStyles } from './budget-source-chart.styles';
+import { CHART_HEIGHT, CHART_WIDTH } from './common.styles';
 
 type BudgetSourceChartProps = {
   area: PriorityArea;

@@ -1,6 +1,6 @@
 import { ThemeProvider } from "react-jss";
 import { useParams } from "react-router-dom";
-import { ActivityBudgetChart } from "../../activity-budget-chart";
+import { ActivityBudgetChart } from "./activity-budget-chart";
 import { ActivityData, ExpenditureData, IndicatorData, ModuleData } from "../../services/data";
 import { priorityAreas } from "../../services/priority-areas";
 import { getAreaTheme } from "../../themes";

@@ -4,41 +4,46 @@ import { CHART_HEIGHT, smallLogo } from './common.styles';
 
 export const useStyles = createUseStyles((theme: AreaTheme) => {
   const result = {
-    budgetSourceContainer: {
+    activityBudgetContainer: {
       display: 'flex',
       flexDirection: 'row',
     },
-    budgetSourceChartContainer: {
+    activityBudgetChartContainer: {
       display: 'flex',
       flexDirection: 'column',
     },
-    budgetSourceLegend: {
+    activityBudgetLegendContainer: {
+      display: 'flex',
+      flexDirection: 'column',
+
+      marginLeft: '50px',
+    },
+    activityBudgetLegendList: {
       display: 'flex',
       flexDirection: 'column',
       maxHeight: `${CHART_HEIGHT}px`,
       overflowY: 'auto',
-
-      marginLeft: '50px',
     },
-    budgetSourceEntry: {
+    activityEntry: {
       display: 'flex',
-      flexDirection: 'row',
+      flexDirection: 'column',
       marginBottom: '10px',
     },
-    budgetSourceLogo: {
+    activityTitle: {
+      display: 'flex',
+      flexDirection: 'row',
+    },
+    activityLogo: {
       ...smallLogo(30, 30),
 
       marginRight: '16px',
     },
-    budgetSourceDescription: {
-      display: 'flex',
-      flexDirection: 'column',
-      marginRight: '20px',
-    },
-    budgetSourceName: {
+    activityExpenditureLink: {
+      color: 'black !important',
       fontWeight: 'bold',
+      textDecoration: 'underline !important',
     },
-  };
+  };  
   return result;
 });
 
