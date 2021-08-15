@@ -59,7 +59,8 @@ const BudgetSourceChartComponent = ({ budgetData, area }: BudgetSourceChartProps
   const classes = useStyles({ theme });
 
   const nationalPrograms = getDataByType(budgetData, BudgetSourceType.NationalProgram);
-  const euPrograms = getDataByType(budgetData, BudgetSourceType.EuropeanProgram);
+  const euPrograms = getDataByType(budgetData, BudgetSourceType.EuropeanProgram)
+                      .concat(getDataByType(budgetData, BudgetSourceType.ExternalSource));
   const budgetItems = getDataByType(budgetData, BudgetSourceType.YearlyBudget);
 
   const nationalProgramShades = generateShades(
