@@ -7,6 +7,7 @@ export enum BudgetSourceType {
   NationalProgram = 'Национална програма',
   EuropeanProgram = 'Европейски програми и проекти',
   YearlyBudget = 'Бюджет',
+  ExternalSource = 'Външен източник'
 }
 
 export interface HasYear {
@@ -100,6 +101,7 @@ export interface IndicatorData extends HasYear {
   euAverage: number;
   publishingPeriod: string;
   sourceLink: string;
+  isTarget: boolean;
 }
 
 const dataIndicatorPerAreaHeaderMapping: {[key: string]: string} = {
@@ -126,6 +128,14 @@ export async function fetchDataPerAreaIndicator() {
         if (errors?.length) {
           reject(errors);
         } else {
+          (data as any[]).forEach(d => {
+            const target = "цел";
+            if(d.year && typeof d.year !== 'number') {
+              d.isTarget = true;
+              d.year = Number.parseInt(d.year.substring(target.length))
+            }
+          });
+
           resolve(data as IndicatorData[]);
         }
       },

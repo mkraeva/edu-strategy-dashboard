@@ -45,9 +45,15 @@ const IndicatorChart = ({
   selectedName,
 }: IndicatorChartProps) => {
   const records = indicatorData.filter((d) => d.name === selectedName);
-  const years = records.map((d) => d.year);
-  const values = records.map((d) => d.value);
-  const euAverage = records.map((d) => d.euAverage);
+
+  const historic = records.filter(d => !d.isTarget);
+  const years = historic.map((d) => d.year);
+  const values = historic.map((d) => d.value);
+  const euAverage = historic.map((d) => d.euAverage);
+
+  const targets = records.filter(d => d.isTarget);
+  const targetYears = targets.map((d) => d.year);
+  const targetValues = targets.map((d) => d.value);
 
   const plotData: Partial<PlotData>[] = [
     {
@@ -68,6 +74,15 @@ const IndicatorChart = ({
         color: "blue",
       },
     },
+    {
+      x: targetYears,
+      y: targetValues,
+      mode: "lines+markers",
+      name: `Целева стойност ${targetYears[0]}`,
+      line: {
+        color: "green"
+      }
+    }
   ];
 
   const plotLayout: Partial<Plotly.Layout> = {
@@ -83,7 +98,7 @@ const IndicatorChart = ({
     },
     xaxis: {
       title: "Година",
-      tickvals: years,
+      tickvals: years.concat(targetYears),
     },
     hovermode: "y",
     legend: {
