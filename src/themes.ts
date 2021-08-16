@@ -23,9 +23,7 @@ export const areaColors = [
   '#024F7A',
 ];
 
-const nationalProgramColors = areaColors;
-
-const budgetColors = [
+const nationalProgramColors = [
   '#12BCBF',
   '#7EA4A4',
   '#3ABC95',
@@ -36,6 +34,8 @@ const budgetColors = [
   '#8A0464',
   '#EF4643',
 ];
+
+const budgetColors = areaColors;
 
 const europeanProgramColors = [
   '#02618F',
