@@ -116,10 +116,12 @@ const ActivityBudgetChart: React.FC<ActivityBudgetChartProps> = ({
                     l: 0,
                   },
                   yaxis: {
+                    visible: false,
                     tickvals: [],
                     showgrid: false
                   },
                   xaxis: {
+                    zeroline: false,
                     showgrid: false
                   },
                   width: 500,

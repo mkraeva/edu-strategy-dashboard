@@ -92,13 +92,13 @@ const IndicatorChart = ({
       y: targetValues,
       mode: "lines+markers",
       name: `Целева стойност ${targetYears[0]}`,
+      hoverinfo: "y",
       marker: {
         size: 15
       },
       line: {
         color: "#27C42C"
       },
-      hoverinfo: "y",
     }
   ];
 
