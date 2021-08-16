@@ -6,8 +6,8 @@ import { PriorityArea } from '../../services/priority-areas';
 import { AreaTheme, generateShades } from '../../themes';
 import YearBreakdown from '../../year-breakdown';
 import { useStyles } from './budget-source-chart.styles';
-import { CHART_HEIGHT, CHART_WIDTH } from './common.styles';
 import NumberFormat from 'react-number-format';
+import { CHART_CONFIG, PIE_CHART_LAYOUT } from './common.styles';
 
 type BudgetSourceChartProps = {
   area: PriorityArea;
@@ -106,7 +106,7 @@ const BudgetSourceChartComponent = ({ budgetData, area }: BudgetSourceChartProps
         <div className={classes.budgetSourceChartContainer}>
           <YearBreakdown />
           <Plot
-            config={{ displayModeBar: false }}
+            config={CHART_CONFIG}
             data={[
               {
                 labels: reordered.map(d => getModuleName(d)),
@@ -120,9 +120,7 @@ const BudgetSourceChartComponent = ({ budgetData, area }: BudgetSourceChartProps
                 textinfo: 'none',
               },
             ]}
-            layout={{
-              width: CHART_WIDTH, height: CHART_HEIGHT, dragmode: false
-            }}
+            layout={PIE_CHART_LAYOUT}
           />
         </div>
         <div className={classes.budgetSourceLegend}>

@@ -1,6 +1,7 @@
 import React from 'react';
 import { AreaLegend } from './area-legend';
 import { useStyles } from './budget-chart.styles';
+import { CHART_CONFIG, PIE_CHART_LAYOUT } from './components/priority-area/common.styles';
 import { Plot } from './lib/util';
 import { ModuleData } from './services/data';
 import { getAreaTheme } from './themes';
@@ -18,7 +19,7 @@ const BudgetChart: React.FC<BudgetChartProps> = ({ budgetData }) => {
       <h2 className="chart-title">Изразходвани средства по приоритетна област (на годишна база)</h2>
       <YearBreakdown/>
       <Plot
-        config={{ displayModeBar: false }}
+        config={CHART_CONFIG}
         data={[
           {
             labels: budgetData.map(d => d.area),
@@ -30,7 +31,7 @@ const BudgetChart: React.FC<BudgetChartProps> = ({ budgetData }) => {
             showlegend: false,
           },
         ]}
-        layout={ {width: 460, height: 480, dragmode: false } }
+        layout={PIE_CHART_LAYOUT}
       />
       </div>
       <AreaLegend budgetData={budgetData}></AreaLegend>

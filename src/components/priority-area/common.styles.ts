@@ -1,5 +1,18 @@
-export const CHART_HEIGHT = 480;
-export const CHART_WIDTH = 460;
+export const PIE_CHART_LAYOUT: Partial<Plotly.Layout> | any = {
+  width: 480,
+  height: 420,
+  dragmode: false,
+  margin: {
+    t: 10,
+    b: 10,
+    l: 0,
+    r: 0
+  }
+};
+
+export const CHART_CONFIG: Partial<Plotly.Config> = {
+  displayModeBar: false
+};
 
 export const smallLogo = (width: number, height: number) => ({
   flexShrink: 0,

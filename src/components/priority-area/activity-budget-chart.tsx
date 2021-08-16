@@ -9,6 +9,7 @@ import YearBreakdown from "../../year-breakdown";
 import { ActivityExpenditure } from "./activity-expenditure";
 import { useTheme } from "react-jss";
 import { NationalEUBudgetLegend } from "./national-vs-eu-budget-legend";
+import { CHART_CONFIG, PIE_CHART_LAYOUT } from "./common.styles";
 
 type ActivityBudgetChartProps = {
   activityData: ActivityData[];
@@ -44,7 +45,7 @@ const ActivityBudgetChart: React.FC<ActivityBudgetChartProps> = ({
         <div className={classes.activityBudgetChartContainer}>
           <YearBreakdown />
           <Plot
-            config={{ displayModeBar: false }}
+            config={CHART_CONFIG}
             data={[
               {
                 labels: reordered.map((d) => d.activity),
@@ -59,7 +60,7 @@ const ActivityBudgetChart: React.FC<ActivityBudgetChartProps> = ({
                 textinfo: "none",
               },
             ]}
-            layout={{ width: 460, height: 480, dragmode: false }}
+            layout={PIE_CHART_LAYOUT}
           />
         </div>
         <div className={classes.activityBudgetLegendContainer}>
@@ -81,7 +82,7 @@ const ActivityBudgetChart: React.FC<ActivityBudgetChartProps> = ({
                 </Link>
               </div>
               <Plot
-                config={{ displayModeBar: false }}
+                config={CHART_CONFIG}
                 data={[
                   {
                     y: [activityData.activity],

@@ -4,6 +4,7 @@ import { useState } from "react";
 import { Plot } from "../../lib/util";
 import { IndicatorData } from "../../services/data";
 import { getAreaTheme } from '../../themes';
+import { CHART_CONFIG } from "./common.styles";
 import "./indicator-chart.css";
 
 interface IndicatorChartProps {
@@ -132,7 +133,7 @@ const IndicatorChart = ({
       <Plot
         data={plotData}
         layout={plotLayout}
-        config={{ displayModeBar: false }}
+        config={CHART_CONFIG}
       />
     </>
   );

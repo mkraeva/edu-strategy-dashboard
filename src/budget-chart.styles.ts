@@ -1,4 +1,5 @@
 import { createUseStyles, WithStylesProps } from 'react-jss';
+import { PIE_CHART_LAYOUT } from './components/priority-area/common.styles';
 import { AreaTheme } from './themes';
 
 export const useStyles = createUseStyles((theme: AreaTheme) => {
@@ -10,6 +11,7 @@ export const useStyles = createUseStyles((theme: AreaTheme) => {
     budgetChartChartContainer: {
       display: 'flex',
       flexDirection: 'column',
+      maxWidth: `${PIE_CHART_LAYOUT.width + PIE_CHART_LAYOUT.margin.l + PIE_CHART_LAYOUT.margin.r}px`,
     },
   };
   return result;

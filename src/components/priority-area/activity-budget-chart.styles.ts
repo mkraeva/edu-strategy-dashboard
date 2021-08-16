@@ -1,6 +1,6 @@
 import { createUseStyles, WithStylesProps } from 'react-jss';
 import { AreaTheme } from '../../themes';
-import { CHART_HEIGHT, smallLogo } from './common.styles';
+import { PIE_CHART_LAYOUT, smallLogo } from './common.styles';
 
 export const useStyles = createUseStyles((theme: AreaTheme) => {
   const result = {
@@ -21,7 +21,7 @@ export const useStyles = createUseStyles((theme: AreaTheme) => {
     activityBudgetLegendList: {
       display: 'flex',
       flexDirection: 'column',
-      maxHeight: `${CHART_HEIGHT}px`,
+      maxHeight: `${PIE_CHART_LAYOUT.height}px`,
       overflowY: 'auto',
     },
     activityEntry: {
