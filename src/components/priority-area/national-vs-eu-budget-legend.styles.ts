@@ -12,6 +12,7 @@ export const useStyles = createUseStyles((theme: AreaTheme) => {
       marginTop: '10px',
     },
     legendIndicationContainer: {
+      paddingRight: 10
     },
     legendIndication: {
       ...smallLogo(48, 10),

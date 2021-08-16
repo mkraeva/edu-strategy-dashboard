@@ -126,7 +126,7 @@ const BudgetSourceChartComponent = ({ budgetData, area }: BudgetSourceChartProps
         <div className={classes.budgetSourceLegend}>
           { reordered.map((moduleData, idx) => (
           <BudgetSourceEntryComponent
-            key={getModuleName(moduleData)}
+            key={getModuleName(moduleData) || idx}
             moduleData={moduleData}
             totalBudget={totalAreaBudget}
             color={reorderedColors[idx]}

@@ -2,6 +2,7 @@ import { sortBy, sum } from "lodash";
 import React from "react";
 import { ThemeProvider } from "react-jss";
 import AreaLegendEntry from "./area-legend-entry";
+import { NationalEUBudgetLegend } from "./components/priority-area/national-vs-eu-budget-legend";
 import { groupBy } from "./lib/util";
 import { BudgetSourceType, ModuleData } from "./services/data";
 import { priorityAreas } from "./services/priority-areas";
@@ -51,6 +52,9 @@ export const AreaLegend: React.FC<BudgetChartProps> = ({
   );
   return (
     <div className="legend">
+      <div style={{ paddingLeft: 50 }}>
+        <NationalEUBudgetLegend/>
+      </div>
       {sortedPriorityAreas.map((area) => (
         <ThemeProvider theme={getAreaTheme(area.name)} key={area.name}>
           <AreaLegendEntry

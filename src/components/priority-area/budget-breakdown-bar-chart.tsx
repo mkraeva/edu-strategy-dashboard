@@ -1,7 +1,7 @@
 import { useTheme } from "react-jss";
 import { formatLv, Plot } from "../../lib/util";
 import { AreaTheme } from "../../themes";
-import { CHART_CONFIG } from "./common.styles";
+import { CHART_CONFIG, COLORS } from "./common.styles";
 
 export type BudgetBreakdownData = {
   name: string;
@@ -19,6 +19,7 @@ export const BudgetSourceBreakdownBarChart = ({
   areaThemed,
 }: BudgetSourceBreakdownBarChartProps) => {
   const theme = useTheme<AreaTheme>();
+  console.log(data.euBudget, data.nationalBudget);
   return (
     <>
       <Plot
@@ -31,7 +32,7 @@ export const BudgetSourceBreakdownBarChart = ({
             hoverinfo: "text",
             width: 0.25,
             marker: {
-              color: areaThemed ? theme.budgetColor : "#024B76",
+              color: areaThemed ? theme.budgetColor : COLORS.nationalBudget,
             },
             type: "bar",
             orientation: "h",
@@ -45,7 +46,7 @@ export const BudgetSourceBreakdownBarChart = ({
             hoverinfo: "text",
             width: 0.25,
             marker: {
-              color: areaThemed ? theme.euProgramColor : "#0678A9",
+              color: areaThemed ? theme.euProgramColor : COLORS.euBudget,
             },
             type: "bar",
             orientation: "h",
@@ -59,8 +60,8 @@ export const BudgetSourceBreakdownBarChart = ({
           margin: {
             pad: 0,
             t: 0,
+            b: 20,
             l: 0,
-            b: 40,
           },
           yaxis: {
             visible: false,
@@ -75,7 +76,7 @@ export const BudgetSourceBreakdownBarChart = ({
             ticktext: [formatLv(data.nationalBudget), formatLv(data.euBudget)],
           },
           autosize: true,
-          height: 100,
+          height: 70,
           barmode: "stack",
         }}
       />
