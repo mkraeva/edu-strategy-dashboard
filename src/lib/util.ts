@@ -19,3 +19,19 @@ export function groupBy<Entity>(data: Entity[], byKey: string) {
 export function formatLv(value: number) {
   return value?.toLocaleString("en-US") + " лв.";
 }
+
+const hashCache = new Map();
+export function hashActivity(value: string) {
+  if (hashCache.has(value)) {
+    return hashCache.get(value);
+  }
+
+  let h = 0;
+  let length = value.length >> 2;
+  for (let i = 0; i < length; i++) {
+      h = 31 * h + value.charCodeAt(i);
+  }
+  let hash = h.toString(16);
+  hashCache.set(value, hash);
+  return hash;
+}

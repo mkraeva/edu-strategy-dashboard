@@ -2,7 +2,7 @@ import { sortBy } from "lodash";
 import React from "react";
 import { Link, useRouteMatch } from "react-router-dom";
 import { useStyles } from "./activity-budget-chart.styles";
-import { Plot } from "../../lib/util";
+import { hashActivity, Plot } from "../../lib/util";
 import { ActivityData, ExpenditureData } from "../../services/data";
 import { AreaTheme, generateShades } from "../../themes";
 import YearBreakdown from "../../year-breakdown";
@@ -16,6 +16,17 @@ type ActivityBudgetChartProps = {
   activityData: ActivityData[];
   expenditureData: ExpenditureData[];
 };
+
+function selectedExpenditure(expenditureData: ExpenditureData[], areaName: string, activity: string) {
+  if (activity) {
+    return expenditureData.filter(d => d.area === areaName && hashActivity(d.activity) === activity);
+  } else if (expenditureData.length) {
+    let first = expenditureData[0];
+    return expenditureData.filter(d => d.area === first.area && hashActivity(d.activity) === first.activity);
+  } else {
+    return [];
+  }
+}
 
 interface RouterMatch {
   id: string; // priority area id
@@ -76,7 +87,7 @@ const ActivityBudgetChart: React.FC<ActivityBudgetChartProps> = ({
                   }}
                 />
                 <Link
-                  to={`/priority-area/${areaId}/${activityData.activity}`}
+                  to={`/priority-area/${areaId}/${hashActivity(activityData.activity)}`}
                   className={classes.activityExpenditureLink}
                 >
                   {activityData.activity}
@@ -94,7 +105,7 @@ const ActivityBudgetChart: React.FC<ActivityBudgetChartProps> = ({
         </div>
       </div>
       {!!activity && <ActivityExpenditure 
-        expenditureData={expenditureData.filter(d => d.area === areaName && d.activity === activity)}
+        expenditureData={selectedExpenditure(expenditureData, areaName, activity || "")}
       />}
     </div>
   );

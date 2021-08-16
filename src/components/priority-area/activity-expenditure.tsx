@@ -45,6 +45,7 @@ const ActivityExpenditure: React.FC<{ expenditureData: ExpenditureData[] }> = ({
           },
         ]}
         layout={{
+          title: expenditureData[0]?.activity,
           dragmode: false,
           margin: {
             pad: 20,
