@@ -17,5 +17,5 @@ export function groupBy<Entity>(data: Entity[], byKey: string) {
 }
 
 export function formatLv(value: number) {
-  return value.toLocaleString("en-US") + " лв.";
+  return value?.toLocaleString("en-US") + " лв.";
 }

@@ -20,8 +20,8 @@ const ActivityExpenditure: React.FC<{ expenditureData: ExpenditureData[] }> = ({
             x: expenditureData.map(
               (a) => a.nationalBudget
             ),
-            width: 0.4,
             hoverinfo: "x",
+            width: 0.25,
             marker: {
               color: theme.budgetColor,
               width: 0.25,
@@ -33,8 +33,8 @@ const ActivityExpenditure: React.FC<{ expenditureData: ExpenditureData[] }> = ({
           {
             y: expenditureData.map((a) => a.expenseType),
             x: expenditureData.map((a) => a.externalBudget),
-            width: 0.4,
             hoverinfo: "x",
+            width: 0.25,
             marker: {
               color: theme.euProgramColor,
               width: 0.25,
@@ -46,7 +46,18 @@ const ActivityExpenditure: React.FC<{ expenditureData: ExpenditureData[] }> = ({
         ]}
         layout={{
           dragmode: false,
-          width: EXPEDITURE_CHART_WIDTH,
+          margin: {
+            pad: 20,
+          },
+          // legend: {
+          //   orientation: 'h'
+          // },
+          // yaxis: {
+          //   tickvals: [],
+          // },
+          height: 300,
+          // width: EXPEDITURE_CHART_WIDTH,
+          autosize: true,
           yaxis: {
             automargin: true,
           },

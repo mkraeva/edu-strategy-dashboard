@@ -7,14 +7,14 @@ export const useStyles = createUseStyles((theme: AreaTheme) => {
     activityBudgetLegend: {
       display: 'flex',
       flexDirection: 'row',
-      justifyContent: 'space-between',
+      justifyContent: 'space-around',
 
       marginTop: '10px',
     },
     legendIndicationContainer: {
     },
     legendIndication: {
-      ...smallLogo(32, 6),
+      ...smallLogo(48, 10),
     },
     legendText: {
 

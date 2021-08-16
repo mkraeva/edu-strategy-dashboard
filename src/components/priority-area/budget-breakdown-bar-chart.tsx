@@ -57,8 +57,10 @@ export const BudgetSourceBreakdownBarChart = ({
           dragmode: false,
           showlegend: false,
           margin: {
+            pad: 0,
             t: 0,
             l: 0,
+            b: 40,
           },
           yaxis: {
             visible: false,
@@ -72,7 +74,7 @@ export const BudgetSourceBreakdownBarChart = ({
             ],
             ticktext: [formatLv(data.nationalBudget), formatLv(data.euBudget)],
           },
-          width: 500,
+          autosize: true,
           height: 100,
           barmode: "stack",
         }}
