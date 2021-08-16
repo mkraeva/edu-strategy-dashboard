@@ -30,7 +30,7 @@ const BudgetChart: React.FC<BudgetChartProps> = ({ budgetData }) => {
             showlegend: false,
           },
         ]}
-        layout={ {width: 460, height: 480 } }
+        layout={ {width: 460, height: 480, dragmode: false } }
       />
       </div>
       <AreaLegend budgetData={budgetData}></AreaLegend>

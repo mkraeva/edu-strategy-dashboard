@@ -59,7 +59,7 @@ const ActivityBudgetChart: React.FC<ActivityBudgetChartProps> = ({
                 textinfo: "none",
               },
             ]}
-            layout={{ width: 460, height: 480 }}
+            layout={{ width: 460, height: 480, dragmode: false }}
           />
         </div>
         <div className={classes.activityBudgetLegendContainer}>
@@ -81,7 +81,7 @@ const ActivityBudgetChart: React.FC<ActivityBudgetChartProps> = ({
                 </Link>
               </div>
               <Plot
-                config={{ displayModeBar: false, staticPlot: true }}
+                config={{ displayModeBar: false }}
                 data={[
                   {
                     y: [activityData.activity],
@@ -110,6 +110,7 @@ const ActivityBudgetChart: React.FC<ActivityBudgetChartProps> = ({
                   },
                 ]}
                 layout={{
+                  dragmode: false,
                   showlegend: false,
                   margin: {
                     t: 0,
@@ -118,16 +119,14 @@ const ActivityBudgetChart: React.FC<ActivityBudgetChartProps> = ({
                   yaxis: {
                     visible: false,
                     tickvals: [],
-                    showgrid: false
                   },
                   xaxis: {
+                    showgrid: false,
                     zeroline: false,
-                    showgrid: false
                   },
                   width: 500,
                   height: 100,
                   barmode: "stack",
-                  barnorm: "percent",
                 }}
               />
             </div>

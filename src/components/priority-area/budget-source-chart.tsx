@@ -121,7 +121,7 @@ const BudgetSourceChartComponent = ({ budgetData, area }: BudgetSourceChartProps
               },
             ]}
             layout={{
-              width: CHART_WIDTH, height: CHART_HEIGHT,
+              width: CHART_WIDTH, height: CHART_HEIGHT, dragmode: false
             }}
           />
         </div>

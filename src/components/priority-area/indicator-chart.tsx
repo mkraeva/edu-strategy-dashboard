@@ -124,6 +124,7 @@ const IndicatorChart = ({
     margin: {
       t: 20,
     },
+    dragmode: false
   };
 
   return (

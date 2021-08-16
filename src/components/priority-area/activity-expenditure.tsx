@@ -12,7 +12,7 @@ const ActivityExpenditure: React.FC<{ expenditureData: ExpenditureData[] }> = ({
   return (
     <div className={classes.expeditureContainer}>
       <Plot
-        config={{ displayModeBar: false, staticPlot: true }}
+        config={{ displayModeBar: false }}
         data={[
           {
             y: expenditureData.map((a) => a.expenseType),
@@ -20,6 +20,7 @@ const ActivityExpenditure: React.FC<{ expenditureData: ExpenditureData[] }> = ({
               (a) => a.nationalBudget
             ),
             width: 0.4,
+            hoverinfo: "x",
             marker: {
               color: theme.budgetColor,
               width: 0.25,
@@ -32,6 +33,7 @@ const ActivityExpenditure: React.FC<{ expenditureData: ExpenditureData[] }> = ({
             y: expenditureData.map((a) => a.expenseType),
             x: expenditureData.map((a) => a.externalBudget),
             width: 0.4,
+            hoverinfo: "x",
             marker: {
               color: theme.euProgramColor,
               width: 0.25,
@@ -42,16 +44,7 @@ const ActivityExpenditure: React.FC<{ expenditureData: ExpenditureData[] }> = ({
           },
         ]}
         layout={{
-          // margin: {
-          //   t: 0,
-          // },
-          // legend: {
-          //   orientation: 'h'
-          // },
-          // yaxis: {
-          //   tickvals: [],
-          // },
-          // height: 300,
+          dragmode: false,
           width: EXPEDITURE_CHART_WIDTH,
           yaxis: {
             automargin: true,
