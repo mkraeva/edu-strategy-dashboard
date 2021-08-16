@@ -10,6 +10,7 @@ import { ActivityExpenditure } from "./activity-expenditure";
 import { useTheme } from "react-jss";
 import { NationalEUBudgetLegend } from "./national-vs-eu-budget-legend";
 import { CHART_CONFIG, PIE_CHART_LAYOUT } from "./common.styles";
+import { BudgetSourceBreakdownBarChart } from "./budget-breakdown-bar-chart";
 
 type ActivityBudgetChartProps = {
   activityData: ActivityData[];
@@ -81,55 +82,11 @@ const ActivityBudgetChart: React.FC<ActivityBudgetChartProps> = ({
                   {activityData.activity}
                 </Link>
               </div>
-              <Plot
-                config={CHART_CONFIG}
-                data={[
-                  {
-                    y: [activityData.activity],
-                    x: [activityData.nationalBudget],
-                    hoverinfo: "x",
-                    width: 0.25,
-                    marker: {
-                      color: theme.budgetColor,
-                    },
-                    type: "bar",
-                    orientation: "h",
-                    name: "Средства от националния бюджет (%)",
-                  },
-                  {
-                    y: [activityData.activity],
-                    x: [activityData.externalBudget],
-                    hoverinfo: "x",
-                    width: 0.25,
-                    marker: {
-                      color: theme.euProgramColor
-                    },
-                    type: "bar",
-                    orientation: "h",
-                    labels: [],
-                    name: "Средства от ЕС и други международни проекти и програми (%)",
-                  },
-                ]}
-                layout={{
-                  dragmode: false,
-                  showlegend: false,
-                  margin: {
-                    t: 0,
-                    l: 0,
-                  },
-                  yaxis: {
-                    visible: false,
-                    tickvals: [],
-                  },
-                  xaxis: {
-                    showgrid: false,
-                    zeroline: false,
-                  },
-                  width: 500,
-                  height: 100,
-                  barmode: "stack",
-                }}
-              />
+              <BudgetSourceBreakdownBarChart areaThemed={true} data={{
+                name: activityData.activity,
+                nationalBudget: activityData.nationalBudget,
+                euBudget: activityData.externalBudget,
+              }}/>
             </div>
           ))}
           </div>

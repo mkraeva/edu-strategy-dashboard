@@ -104,6 +104,9 @@ class App extends React.Component<AppProps, AppState> {
                 indicatorData={indicatorData}
               />
             </Route>
+            <Route path="/priority-area">
+              <Redirect to="/priority-area/0"/>
+            </Route>
             <Route path="/">
               <Redirect to="/all-areas" />
             </Route>

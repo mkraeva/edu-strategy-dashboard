@@ -1,4 +1,4 @@
-import { range, uniqBy } from "lodash";
+import { uniqBy } from "lodash";
 import { PlotData } from "plotly.js";
 import { useState } from "react";
 import { Plot } from "../../lib/util";
