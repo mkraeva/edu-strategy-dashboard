@@ -9,7 +9,7 @@ export const useStyles = createUseStyles((theme: AreaTheme) => {
       display: 'flex',
       flexDirection: 'column',
 
-      maxWidth: `${EXPEDITURE_CHART_WIDTH}px`,
+      // maxWidth: `${EXPEDITURE_CHART_WIDTH}px`,
     }
   };
   return result;

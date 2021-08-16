@@ -114,8 +114,10 @@ const ActivityBudgetChart: React.FC<ActivityBudgetChartProps> = ({
                   dragmode: false,
                   showlegend: false,
                   margin: {
+                    pad: 0,
                     t: 0,
                     l: 0,
+                    b: 40,
                   },
                   yaxis: {
                     visible: false,
@@ -125,8 +127,9 @@ const ActivityBudgetChart: React.FC<ActivityBudgetChartProps> = ({
                     showgrid: false,
                     zeroline: false,
                   },
-                  width: 500,
+                  autosize: true,
                   height: 100,
+
                   barmode: "stack",
                 }}
               />
