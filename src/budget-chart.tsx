@@ -3,9 +3,11 @@ import { AreaLegend } from './area-legend';
 import { useStyles } from './budget-chart.styles';
 import { CHART_CONFIG, PIE_CHART_LAYOUT } from './components/priority-area/common.styles';
 import { Plot } from './lib/util';
+import { sumBy } from 'lodash';
 import { ModuleData } from './services/data';
 import { getAreaTheme } from './themes';
 import YearBreakdown from './year-breakdown';
+import NumberFormat from 'react-number-format';
 
 type BudgetChartProps = {
   budgetData: ModuleData[],
@@ -16,23 +18,43 @@ const BudgetChart: React.FC<BudgetChartProps> = ({ budgetData }) => {
   return (
     <div className={classes.budgetChartContainer}>
       <div className={classes.budgetChartChartContainer}>
-      <h2 className="chart-title">Изразходвани средства по приоритетна област (на годишна база)</h2>
-      <YearBreakdown/>
-      <Plot
-        config={CHART_CONFIG}
-        data={[
-          {
-            labels: budgetData.map(d => d.area),
-            values: budgetData.map(d => d.budget),
-            marker: {
-              colors: budgetData.map(d => getAreaTheme(d.area).primaryColor),
+        <h2 className="chart-title">Изразходвани средства по приоритетна област (на годишна база)</h2>
+        <YearBreakdown/>
+        <Plot
+          config={CHART_CONFIG}
+          data={[
+            {
+              labels: budgetData.map(d => d.area),
+              values: budgetData.map(d => d.budget),
+              marker: {
+                colors: budgetData.map(d => getAreaTheme(d.area).primaryColor),
+              },
+              type: 'pie',
+              showlegend: false,
             },
-            type: 'pie',
-            showlegend: false,
-          },
-        ]}
-        layout={PIE_CHART_LAYOUT}
-      />
+          ]}
+          layout={PIE_CHART_LAYOUT}
+        />
+        <div className={classes.totalsData}>
+          <div>
+            <p className={classes.totalsNumber}>
+              {12}
+            </p>
+            изпълнявани програми
+          </div>
+          <div>
+            <p className={classes.totalsNumber}>
+              <NumberFormat
+                value={sumBy(budgetData,'budget')}
+                thousandSeparator={true}
+                decimalScale={0}
+                suffix=" лв."
+                displayType="text"
+              />
+            </p>
+            отчетени разходи
+          </div>
+        </div>
       </div>
       <AreaLegend budgetData={budgetData}></AreaLegend>
     </div>

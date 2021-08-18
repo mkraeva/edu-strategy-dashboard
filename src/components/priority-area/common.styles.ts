@@ -1,7 +1,8 @@
 export const PIE_CHART_LAYOUT: Partial<Plotly.Layout> | any = {
-  width: 480,
-  height: 420,
+  // width: 480,
+  // height: 420,
   dragmode: false,
+  autosize: true,
   margin: {
     t: 10,
     b: 10,
