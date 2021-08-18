@@ -11,7 +11,7 @@ export const useStyles = createUseStyles((theme: AreaTheme) => {
     budgetChartChartContainer: {
       display: 'flex',
       flexDirection: 'column',
-      // maxWidth: `${PIE_CHART_LAYOUT.width + PIE_CHART_LAYOUT.margin.l + PIE_CHART_LAYOUT.margin.r}px`,
+      maxWidth: `${PIE_CHART_LAYOUT.width + PIE_CHART_LAYOUT.margin.l + PIE_CHART_LAYOUT.margin.r}px`,
     },
     totalsData: {
       display: 'flex',
