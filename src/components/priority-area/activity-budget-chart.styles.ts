@@ -43,7 +43,14 @@ export const useStyles = createUseStyles((theme: AreaTheme) => {
       fontWeight: 'bold',
       textDecoration: 'underline !important',
     },
-  };  
+    areaStats: {
+      marginTop: '15px',
+      marginBottom: '10px',
+    },
+    areaPercentage: {
+      padding: '0 3px 3px',
+    }
+  };
   return result;
 });
 

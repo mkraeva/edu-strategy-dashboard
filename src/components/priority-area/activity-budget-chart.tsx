@@ -1,4 +1,4 @@
-import { sortBy } from "lodash";
+import { sortBy, sumBy } from "lodash";
 import React from "react";
 import { Link, useRouteMatch } from "react-router-dom";
 import { useStyles } from "./activity-budget-chart.styles";
@@ -11,6 +11,7 @@ import { useTheme } from "react-jss";
 import { NationalEUBudgetLegend } from "./national-vs-eu-budget-legend";
 import { CHART_CONFIG, PIE_CHART_LAYOUT } from "./common.styles";
 import { BudgetSourceBreakdownBarChart } from "./budget-breakdown-bar-chart";
+import NumberFormat from 'react-number-format';
 
 type ActivityBudgetChartProps = {
   activityData: ActivityData[];
@@ -92,6 +93,24 @@ const ActivityBudgetChart: React.FC<ActivityBudgetChartProps> = ({
                 >
                   {activityData.activity}
                 </Link>
+              </div>
+              <div className={classes.areaStats}>
+                <NumberFormat
+                  value={activityData.nationalBudget + activityData.externalBudget}
+                  thousandSeparator={true}
+                  suffix=" лв."
+                  displayType="text"
+                />
+                &nbsp;
+                <span className={classes.areaPercentage} style={{
+                    backgroundColor: `${colors[idx]}55`,
+                  }}>
+                  [{(
+                    (activityData.nationalBudget + activityData.externalBudget)/
+                    sumBy(reordered, d=>d.nationalBudget + d.externalBudget))
+                    .toPrecision(2)
+                  }%]
+                </span>
               </div>
               <BudgetSourceBreakdownBarChart areaThemed={true} data={{
                 name: activityData.activity,

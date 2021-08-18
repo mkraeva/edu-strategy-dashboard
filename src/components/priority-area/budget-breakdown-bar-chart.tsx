@@ -69,9 +69,10 @@ export const BudgetSourceBreakdownBarChart = ({
           xaxis: {
             showgrid: false,
             zeroline: false,
+            tickmode: 'array',
             tickvals: [
-              data.nationalBudget / 2,
-              data.nationalBudget + data.euBudget / 2,
+              data.nationalBudget/2,
+              data.nationalBudget + data.euBudget/2,
             ],
             ticktext: [formatLv(data.nationalBudget), formatLv(data.euBudget)],
           },
