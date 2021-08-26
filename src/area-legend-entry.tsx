@@ -34,7 +34,7 @@ const AreaLegendEntry = ({area, nationalBudget, externalBudget, totalBudget }: A
         &nbsp;<span className={classes.areaPercentage}>[{budgetPercentage.toPrecision(2)}%]</span>
       </div>
       <BudgetSourceBreakdownBarChart areaThemed={false} data={{
-        name: "",
+        name: area.name,
         nationalBudget: nationalBudget,
         euBudget: externalBudget,
       }}/>
