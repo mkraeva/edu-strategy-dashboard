@@ -18,9 +18,13 @@ type ActivityBudgetChartProps = {
   expenditureData: ExpenditureData[];
 };
 
+function isMatch(activity: ActivityData, selectionHash: string) {
+  return hashActivity(activity.activity) === selectionHash;
+}
+
 function selectedExpenditure(expenditureData: ExpenditureData[], areaName: string, activity: string) {
   if (activity) {
-    return expenditureData.filter(d => d.area === areaName && hashActivity(d.activity) === activity);
+    return expenditureData.filter(d => d.area === areaName && isMatch(d, activity));
   } else if (expenditureData.length) {
     let first = expenditureData[0];
     return expenditureData.filter(d => d.area === first.area && hashActivity(d.activity) === first.activity);
@@ -47,6 +51,8 @@ const ActivityBudgetChart: React.FC<ActivityBudgetChartProps> = ({
     activityData,
     (d) => d.activity
   );
+  const totalActivityBudget = sumBy(reordered, d => d.nationalBudget + d.externalBudget);
+  const selectedActivity = activity || hashActivity(reordered[0].activity);
   const colors = generateShades(areaColor, reordered.length);
   return (
     <div className={classes.activityBudgetChartContainer}>
@@ -78,8 +84,8 @@ const ActivityBudgetChart: React.FC<ActivityBudgetChartProps> = ({
         </div>
         <div className={classes.activityBudgetLegendContainer}>
           <div className={classes.activityBudgetLegendList}>
-          {reordered.map((activityData, idx) => (
-            <div key={activityData.activity} className={classes.activityEntry}>
+          {reordered.map((activity, idx) => (
+            <div key={activity.activity} className={`${classes.activityEntry} ${isMatch(activity, selectedActivity) ? classes.selectedActivity : '' }`}>
               <div className={classes.activityTitle}>
                 <div
                   className={classes.activityLogo}
@@ -88,34 +94,32 @@ const ActivityBudgetChart: React.FC<ActivityBudgetChartProps> = ({
                   }}
                 />
                 <Link
-                  to={`/priority-area/${areaId}/${hashActivity(activityData.activity)}`}
+                  to={`/priority-area/${areaId}/${hashActivity(activity.activity)}`}
                   className={classes.activityExpenditureLink}
+                  replace={true}
                 >
-                  {activityData.activity}
+                  {activity.activity}
                 </Link>
               </div>
               <div className={classes.areaStats}>
+              <span className={classes.areaPercentage}>
+                  {(
+                    (activity.nationalBudget + activity.externalBudget) * 100 / totalActivityBudget
+                    )
+                    .toPrecision(2)
+                  }% -
+                </span>
                 <NumberFormat
-                  value={activityData.nationalBudget + activityData.externalBudget}
+                  value={activity.nationalBudget + activity.externalBudget}
                   thousandSeparator={true}
                   suffix=" лв."
                   displayType="text"
                 />
-                &nbsp;
-                <span className={classes.areaPercentage} style={{
-                    backgroundColor: `${colors[idx]}55`,
-                  }}>
-                  [{(
-                    (activityData.nationalBudget + activityData.externalBudget)/
-                    sumBy(reordered, d=>d.nationalBudget + d.externalBudget))
-                    .toPrecision(2)
-                  }%]
-                </span>
               </div>
               <BudgetSourceBreakdownBarChart areaThemed={true} data={{
-                name: activityData.activity,
-                nationalBudget: activityData.nationalBudget,
-                euBudget: activityData.externalBudget,
+                name: activity.activity,
+                nationalBudget: activity.nationalBudget,
+                euBudget: activity.externalBudget,
               }}/>
             </div>
           ))}
@@ -123,8 +127,8 @@ const ActivityBudgetChart: React.FC<ActivityBudgetChartProps> = ({
           <NationalEUBudgetLegend></NationalEUBudgetLegend>
         </div>
       </div>
-      {!!activity && <ActivityExpenditure 
-        expenditureData={selectedExpenditure(expenditureData, areaName, activity || "")}
+      {!!selectedActivity && <ActivityExpenditure
+        expenditureData={selectedExpenditure(expenditureData, areaName, selectedActivity)}
       />}
     </div>
   );

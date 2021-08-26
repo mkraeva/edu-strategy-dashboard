@@ -20,10 +20,10 @@ export function formatLv(value: number) {
   return value?.toLocaleString("en-US") + " лв.";
 }
 
-const hashCache = new Map();
+const hashCache = new Map<string, string>();
 export function hashActivity(value: string) {
   if (hashCache.has(value)) {
-    return hashCache.get(value);
+    return hashCache.get(value)!;
   }
 
   let h = 0;

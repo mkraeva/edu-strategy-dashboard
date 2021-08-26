@@ -57,6 +57,8 @@ export const BudgetSourceBreakdownBarChart = ({
         layout={{
           dragmode: false,
           showlegend: false,
+          paper_bgcolor: 'transparent',
+          plot_bgcolor: 'transparent',
           margin: {
             pad: 0,
             t: 0,

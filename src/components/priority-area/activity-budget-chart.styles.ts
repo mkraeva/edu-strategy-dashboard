@@ -28,6 +28,10 @@ export const useStyles = createUseStyles((theme: AreaTheme) => {
       display: 'flex',
       flexDirection: 'column',
       marginBottom: '10px',
+      padding: '15px',
+    },
+    selectedActivity: {
+      backgroundColor: '#F9F9F9',
     },
     activityTitle: {
       display: 'flex',
