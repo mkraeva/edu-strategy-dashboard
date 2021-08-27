@@ -1,10 +1,18 @@
 .App {
   display: flex;
   flex-direction: column;
+  position: relative;
 }
 
 .chart-title {
   color: #002a41;
   font-weight: bold;
   font-size: 20px;
+}
+
+#rhomb {
+  position: absolute;
+  top: -20px;
+  left: -20px;
+  z-index: 3;
 }

@@ -24,6 +24,7 @@ export const useStyles = createUseStyles((theme: AreaTheme) => {
     },
     totalsNumber: {
       fontSize: '3em',
+      fontFamily: 'Open Sans Condensed',
     }
   };
   return result;

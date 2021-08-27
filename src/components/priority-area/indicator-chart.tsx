@@ -157,10 +157,8 @@ const IndicatorListElement = ({
       className={
         isSelected ? "indicator-list-element-active" : "indicator-list-element"
       }
-      style={{
-        backgroundColor: `${color}55`
-      }}
     >
+      <div className="indicator-list-ribbon" style={{backgroundColor: `${color}`}}></div>
       <p className="indicator-name" onClick={() => setSelected(name)}>
         {name}
       </p>

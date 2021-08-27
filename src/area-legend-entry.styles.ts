@@ -10,6 +10,8 @@ export const useStyles = createUseStyles((theme: AreaTheme) => {
 
       display: 'flex',
       flexDirection: 'row',
+
+      paddingTop: '30px',
     },
     areaLogo: {
       width: '70px',
@@ -25,6 +27,7 @@ export const useStyles = createUseStyles((theme: AreaTheme) => {
     },
     areaName: {
       fontWeight: 'bold',
+      fontSize: '1.5em',
     },
     areaPercentage: {
       backgroundColor: `${theme.primaryColor}55`,
@@ -43,6 +46,9 @@ export const useStyles = createUseStyles((theme: AreaTheme) => {
 
       fontWeight: 'bold',
       textDecoration: 'none !important',
+
+      position: 'relative',
+      top: '-30px',
     }
   };
   return result;

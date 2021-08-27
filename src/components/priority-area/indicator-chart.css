@@ -10,10 +10,14 @@
 }
 
 .indicator-list-element {
+  width: 100%;
   color: #002a41;
   padding-left: 5px;
   padding-right: 5px;
   cursor:  pointer;
+  display: flex;
+  flex-direction: row;
+  background: #F9F9F9 0% 0% no-repeat padding-box;
 }
 
 .indicator-list-element-active {
@@ -22,6 +26,18 @@
   padding-right: 5px;
   box-shadow: 0px 10px 12px #00000029;
   font-weight: bold;
+  cursor: pointer;
+  display: flex;
+  flex-direction: row;
+  background: #FFFFFF 0% 0% no-repeat padding-box;
+}
+
+.indicator-list-ribbon {
+  flex-basis:  14px;
+  flex-shrink: 0;
+  flex-grow: 0;
+  box-shadow: 0px 10px 12px #00000029;
+  margin-top: 3px;
 }
 
 .indicator-body {
@@ -48,10 +64,10 @@
 
 .indicator-current-value {
   font-weight: bold;
-  color: #0678a9;
   margin-bottom: 0;
   font-size: 4em;
   line-height: 1em;
+  font-family: 'Open Sans Condensed';
 }
 
 .indicator-current-eu {
@@ -59,15 +75,18 @@
   color: #002a41;
   font-size: 2em;
   margin-bottom: 0;
+  font-family: 'Open Sans Condensed';
 }
 
 .indicator-target-value {
   font-size: 4em;
   margin-bottom: 0;
+  line-height: 1em;
+  font-family: 'Open Sans Condensed';
 }
 
 .indicator-name {
-  padding: 12px;
+  padding: 15px;
   margin: 0px;
   margin-top: 3px;
 }

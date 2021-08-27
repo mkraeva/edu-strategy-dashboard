@@ -15,6 +15,8 @@ import {
   IndicatorData,
   ModuleData,
 } from "./services/data";
+import packageJson from '../package.json';
+const IMAGES_PREFIX = packageJson.assetsPrefix || process.env.PUBLIC_URL;
 
 interface AppProps {}
 interface AppState {
@@ -91,6 +93,7 @@ class App extends React.Component<AppProps, AppState> {
         }}
       >
         <div className="App">
+          {/*<img id="rhomb" src={`${IMAGES_PREFIX}/rhomb.svg`} alt=""></img>*/}
           <Switch>
             <Route path="/all-areas">
               <BudgetChart budgetData={yearModuleData} />
