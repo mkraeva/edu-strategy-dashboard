@@ -29,6 +29,10 @@ export const useStyles = createUseStyles((theme: AreaTheme) => {
       flexDirection: 'column',
       marginBottom: '10px',
       padding: '15px',
+      cursor: 'pointer',
+      "&:hover": {
+        backgroundColor: '#F9F9F9',
+      }
     },
     selectedActivity: {
       backgroundColor: '#F9F9F9',
