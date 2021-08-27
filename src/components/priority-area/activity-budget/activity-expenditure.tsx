@@ -1,10 +1,10 @@
 import { useTheme } from "react-jss";
 import Plot from "react-plotly.js";
-import { ExpenditureData } from "../../services/data";
-import { AreaTheme } from "../../themes";
-import { EXPEDITURE_CHART_WIDTH, useStyles } from "./activity-expenditure.styles";
-import { CHART_CONFIG } from "./common.styles";
-import { NationalEUBudgetLegend } from "./national-vs-eu-budget-legend";
+import { ExpenditureData } from "../../../services/data";
+import { AreaTheme } from "../../../themes";
+import { useStyles } from "./activity-expenditure.styles";
+import { CHART_CONFIG } from "../common.styles";
+import { NationalEUBudgetLegend } from "../national-vs-eu-budget-legend";
 
 const ActivityExpenditure: React.FC<{ expenditureData: ExpenditureData[] }> = ({ expenditureData }) => {
   const theme = useTheme<AreaTheme>();

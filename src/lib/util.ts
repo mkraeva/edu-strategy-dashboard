@@ -35,3 +35,8 @@ export function hashActivity(value: string) {
   hashCache.set(value, hash);
   return hash;
 }
+
+export function isMatchingActivity(activityName: string, selectionHash: string) {
+  return hashActivity(activityName) === selectionHash;
+}
+

@@ -1,36 +1,24 @@
 import { sortBy, sumBy } from "lodash";
 import React from "react";
-import { Link, useRouteMatch } from "react-router-dom";
+import { useRouteMatch } from "react-router-dom";
 import { useStyles } from "./activity-budget-chart.styles";
-import { hashActivity, Plot } from "../../lib/util";
-import { ActivityData, ExpenditureData } from "../../services/data";
-import { AreaTheme, generateShades } from "../../themes";
-import YearBreakdown from "../../year-breakdown";
+import { hashActivity, isMatchingActivity, Plot } from "../../../lib/util";
+import { ActivityData, ExpenditureData } from "../../../services/data";
+import { AreaTheme, generateShades } from "../../../themes";
+import YearBreakdown from "../../../year-breakdown";
 import { ActivityExpenditure } from "./activity-expenditure";
 import { useTheme } from "react-jss";
-import { NationalEUBudgetLegend } from "./national-vs-eu-budget-legend";
-import { CHART_CONFIG, PIE_CHART_LAYOUT } from "./common.styles";
-import { BudgetSourceBreakdownBarChart } from "./budget-breakdown-bar-chart";
-import NumberFormat from 'react-number-format';
+import { NationalEUBudgetLegend } from "../national-vs-eu-budget-legend";
+import { CHART_CONFIG, PIE_CHART_LAYOUT } from "../common.styles";
+import { ActivityLegendEntry } from "./activity-legend-entry";
 
 type ActivityBudgetChartProps = {
   activityData: ActivityData[];
   expenditureData: ExpenditureData[];
 };
 
-function isMatch(activity: ActivityData, selectionHash: string) {
-  return hashActivity(activity.activity) === selectionHash;
-}
-
 function selectedExpenditure(expenditureData: ExpenditureData[], areaName: string, activity: string) {
-  if (activity) {
-    return expenditureData.filter(d => d.area === areaName && isMatch(d, activity));
-  } else if (expenditureData.length) {
-    let first = expenditureData[0];
-    return expenditureData.filter(d => d.area === first.area && hashActivity(d.activity) === first.activity);
-  } else {
-    return [];
-  }
+  return expenditureData.filter(d => d.area === areaName && isMatchingActivity(d.activity, activity));
 }
 
 interface RouterMatch {
@@ -51,7 +39,7 @@ const ActivityBudgetChart: React.FC<ActivityBudgetChartProps> = ({
     activityData,
     (d) => d.activity
   );
-  const totalActivityBudget = sumBy(reordered, d => d.nationalBudget + d.externalBudget);
+  const totalAreaBudget = sumBy(reordered, d => d.nationalBudget + d.externalBudget);
   const selectedActivity = activity || hashActivity(reordered[0].activity);
   const colors = generateShades(areaColor, reordered.length);
   return (
@@ -85,43 +73,14 @@ const ActivityBudgetChart: React.FC<ActivityBudgetChartProps> = ({
         <div className={classes.activityBudgetLegendContainer}>
           <div className={classes.activityBudgetLegendList}>
           {reordered.map((activity, idx) => (
-            <div key={activity.activity} className={`${classes.activityEntry} ${isMatch(activity, selectedActivity) ? classes.selectedActivity : '' }`}>
-              <div className={classes.activityTitle}>
-                <div
-                  className={classes.activityLogo}
-                  style={{
-                    backgroundColor: colors[idx],
-                  }}
-                />
-                <Link
-                  to={`/priority-area/${areaId}/${hashActivity(activity.activity)}`}
-                  className={classes.activityExpenditureLink}
-                  replace={true}
-                >
-                  {activity.activity}
-                </Link>
-              </div>
-              <div className={classes.areaStats}>
-              <span className={classes.areaPercentage}>
-                  {(
-                    (activity.nationalBudget + activity.externalBudget) * 100 / totalActivityBudget
-                    )
-                    .toPrecision(2)
-                  }% -
-                </span>
-                <NumberFormat
-                  value={activity.nationalBudget + activity.externalBudget}
-                  thousandSeparator={true}
-                  suffix=" лв."
-                  displayType="text"
-                />
-              </div>
-              <BudgetSourceBreakdownBarChart areaThemed={true} data={{
-                name: activity.activity,
-                nationalBudget: activity.nationalBudget,
-                euBudget: activity.externalBudget,
-              }}/>
-            </div>
+            <ActivityLegendEntry
+              key={activity.activity}
+              activity={activity}
+              selectedActivity={selectedActivity}
+              color={colors[idx]}
+              areaId={areaId}
+              totalAreaBudget={totalAreaBudget}
+            />
           ))}
           </div>
           <NationalEUBudgetLegend></NationalEUBudgetLegend>

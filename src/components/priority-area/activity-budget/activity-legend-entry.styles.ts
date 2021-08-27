@@ -1,41 +1,36 @@
 import { createUseStyles, WithStylesProps } from 'react-jss';
-import { AreaTheme } from '../../themes';
-import { PIE_CHART_LAYOUT, smallLogo } from './common.styles';
-
+import { AreaTheme } from '../../../themes';
+import { smallLogo } from '../common.styles';
+import { LegendEntryProps } from './activity-legend-entry';
 export const useStyles = createUseStyles((theme: AreaTheme) => {
   const result = {
-    activityBudgetContainer: {
-      display: 'flex',
-      flexDirection: 'row',
-    },
-    activityBudgetChartContainer: {
-      display: 'flex',
-      flexDirection: 'column',
-    },
-    activityBudgetLegendContainer: {
-      display: 'flex',
-      flexDirection: 'column',
-
-      marginLeft: '50px',
-    },
-    activityBudgetLegendList: {
-      display: 'flex',
-      flexDirection: 'column',
-      maxHeight: `${PIE_CHART_LAYOUT.height}px`,
-      overflowY: 'auto',
-    },
     activityEntry: {
       display: 'flex',
       flexDirection: 'column',
       marginBottom: '10px',
       padding: '15px',
       cursor: 'pointer',
+
+      color: 'black !important',
+      textDecoration: 'none !important',
+
       "&:hover": {
         backgroundColor: '#F9F9F9',
+        '& $activityExpenditureLink': {
+          color: theme.primaryColor,
+          textDecoration: 'underline !important',
+        },
+        '& $seeChartIcon': {
+          fill: (props: LegendEntryProps) => theme.primaryColor,
+          visibility: 'visible',
+        },
       }
     },
     selectedActivity: {
       backgroundColor: '#F9F9F9',
+      '& $seeChartIcon': {
+        visibility: 'visible',
+      }
     },
     activityTitle: {
       display: 'flex',
@@ -47,9 +42,14 @@ export const useStyles = createUseStyles((theme: AreaTheme) => {
       marginRight: '16px',
     },
     activityExpenditureLink: {
-      color: 'black !important',
-      fontWeight: 'bold',
-      textDecoration: 'underline !important',
+      fontWeight: '700',
+    },
+    seeChartIcon: {
+      height: '1em',
+      verticalAlign: 'middle',
+      paddingLeft: '5px',
+
+      visibility: 'hidden',
     },
     areaStats: {
       marginTop: '15px',

@@ -1,5 +1,5 @@
 import { createUseStyles, WithStylesProps } from 'react-jss';
-import { AreaTheme } from '../../themes';
+import { AreaTheme } from '../../../themes';
 
 export const EXPEDITURE_CHART_WIDTH = 700;
 
