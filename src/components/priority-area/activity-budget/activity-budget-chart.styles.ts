@@ -1,6 +1,6 @@
 import { createUseStyles, WithStylesProps } from 'react-jss';
 import { AreaTheme } from '../../../themes';
-import { PIE_CHART_LAYOUT, smallLogo } from '../common.styles';
+import { PIE_CHART_LAYOUT } from '../common.styles';
 
 export const useStyles = createUseStyles((theme: AreaTheme) => {
   const result = {

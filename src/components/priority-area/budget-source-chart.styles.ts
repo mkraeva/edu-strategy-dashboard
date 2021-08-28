@@ -4,7 +4,11 @@ import { PIE_CHART_LAYOUT, smallLogo } from './common.styles';
 
 export const useStyles = createUseStyles((theme: AreaTheme) => {
   const result = {
-    budgetSourceContainer: {
+    mainContainer: {
+      display: 'flex',
+      flexDirection: 'column',
+    },
+    dataContainer: {
       display: 'flex',
       flexDirection: 'row',
     },
@@ -15,7 +19,7 @@ export const useStyles = createUseStyles((theme: AreaTheme) => {
     budgetSourceLegend: {
       display: 'flex',
       flexDirection: 'column',
-      maxHeight: `${PIE_CHART_LAYOUT.height}px`,
+      maxHeight: `${PIE_CHART_LAYOUT.height + 100}px`,
       overflowY: 'auto',
 
       marginLeft: '50px',

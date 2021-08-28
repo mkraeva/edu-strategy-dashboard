@@ -15,10 +15,10 @@ export const useStyles = createUseStyles((theme: AreaTheme) => {
       paddingRight: 10
     },
     legendIndication: {
-      ...smallLogo(48, 10),
+      ...smallLogo(32, 6),
     },
     legendText: {
-
+      fontSize: '0.9em',
     },
   };  
   return result;

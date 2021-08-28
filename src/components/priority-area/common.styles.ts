@@ -24,5 +24,6 @@ export const smallLogo = (width: number, height: number) => ({
 
 export const COLORS = {
   nationalBudget: "#024B76",
-  euBudget: '#0678A9'
+  euBudget: '#0678A9',
+  nationalProgram: '#02618F',
 };

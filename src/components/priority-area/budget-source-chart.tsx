@@ -8,6 +8,7 @@ import YearBreakdown from '../../year-breakdown';
 import { useStyles } from './budget-source-chart.styles';
 import NumberFormat from 'react-number-format';
 import { CHART_CONFIG, PIE_CHART_LAYOUT } from './common.styles';
+import { NationalEUBudgetLegend } from './national-vs-eu-budget-legend';
 
 type BudgetSourceChartProps = {
   area: PriorityArea;
@@ -97,12 +98,12 @@ const BudgetSourceChartComponent = ({ budgetData, area }: BudgetSourceChartProps
   const totalAreaBudget = sum(reordered.map(d => d.budget));
 
   return (
-    <div className={classes.budgetSourceChartContainer}>
+    <div className={classes.mainContainer}>
       <h2 className="chart-title">
         Източници на финансиране в тази приоритетна област
       </h2>
       <p>Графиката показва разпределението на средствата по източниците на финансиране: национални програми, проекти с финансиране от ЕС или друга международна програма, както и средства от националния бюджет извън националните програми</p>
-      <div className={classes.budgetSourceContainer}>
+      <div className={classes.dataContainer}>
         <div className={classes.budgetSourceChartContainer}>
           <YearBreakdown />
           <Plot
@@ -122,6 +123,7 @@ const BudgetSourceChartComponent = ({ budgetData, area }: BudgetSourceChartProps
             ]}
             layout={PIE_CHART_LAYOUT}
           />
+          <NationalEUBudgetLegend includeNationalPrograms={true}/>
         </div>
         <div className={classes.budgetSourceLegend}>
           { reordered.map((moduleData, idx) => (
