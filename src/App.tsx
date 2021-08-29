@@ -25,6 +25,7 @@ interface AppState {
   indicatorData: IndicatorData[];
   expenditureData: ExpenditureData[];
   selectedYear: number;
+  isLoading: boolean;
 }
 
 class App extends React.Component<AppProps, AppState> {
@@ -36,6 +37,7 @@ class App extends React.Component<AppProps, AppState> {
       indicatorData: [],
       expenditureData: [],
       selectedYear: 0,
+      isLoading: true,
     };
   }
 
@@ -54,7 +56,10 @@ class App extends React.Component<AppProps, AppState> {
       if (allYears.length > 0) {
         selectedYear = allYears[allYears.length - 1];
       }
-      this.setState({ moduleData, activityData, indicatorData, expenditureData, selectedYear });
+      this.setState({
+        moduleData, activityData, indicatorData, expenditureData,
+        selectedYear, isLoading: false,
+      });
     } catch (e) {
       console.error(e);
     }
@@ -78,7 +83,16 @@ class App extends React.Component<AppProps, AppState> {
   }
 
   render() {
-    const { moduleData, activityData, expenditureData, indicatorData, selectedYear } = this.state;
+    const {
+      moduleData, activityData, expenditureData, indicatorData,
+      selectedYear,
+      isLoading,
+    } = this.state;
+    if (isLoading) {
+      // TODO: pretty loading indicator?
+      return <div>Зареждане на данните...</div>
+    }
+
     const [yearModuleData, yearActivityData, yearExpenditureData] = [
       this.filterByYear(moduleData),
       this.filterByYear(activityData),
