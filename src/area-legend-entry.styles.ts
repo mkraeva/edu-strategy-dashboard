@@ -30,8 +30,9 @@ export const useStyles = createUseStyles((theme: AreaTheme) => {
       fontSize: '1.5em',
     },
     areaPercentage: {
-      backgroundColor: `${theme.primaryColor}55`,
+      // backgroundColor: `${theme.primaryColor}55`,
       padding: '0 3px 3px',
+      fontWeight: 'bold',
     },
     seeMore: {
       display: 'inline-block',

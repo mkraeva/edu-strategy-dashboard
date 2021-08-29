@@ -23,6 +23,8 @@ export const ActivityLegendEntry = (props: LegendEntryProps) => {
   const { activity, selectedActivity, color, areaId, totalAreaBudget } = props;
 
   const isSelected = isMatchingActivity(activity.activity, selectedActivity);
+  const pct = ((activity.nationalBudget + activity.externalBudget) * 100 / totalAreaBudget).toPrecision(2);
+
   return (
     <Link
       to={`/priority-area/${areaId}/${hashActivity(activity.activity)}`}
@@ -43,19 +45,13 @@ export const ActivityLegendEntry = (props: LegendEntryProps) => {
         </span>
       </div>
       <div className={classes.areaStats}>
-        <span className={classes.areaPercentage}>
-          {(
-            (activity.nationalBudget + activity.externalBudget) * 100 / totalAreaBudget
-            )
-            .toPrecision(2)
-          }% -
-        </span>
         <NumberFormat
           value={activity.nationalBudget + activity.externalBudget}
               thousandSeparator={true}
               suffix=" лв."
               displayType="text"
         />
+        <span className={classes.areaPercentage}>[{pct}%]</span>
       </div>
       <BudgetSourceBreakdownBarChart areaThemed={true} data={{
         name: activity.activity,

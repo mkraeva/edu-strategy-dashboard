@@ -59,7 +59,8 @@ const BudgetSourceEntryComponent = ({ moduleData, totalBudget, color }: { module
             displayType="text"
           />
           &nbsp;<span style={{
-            backgroundColor: `${color}55`,
+            //backgroundColor: `${color}55`,
+            //fontWeight: 'bold',
             padding: '0 3px 3px'
           }}>[{pct}%]</span>
         </div>

@@ -18,7 +18,7 @@ export const useStyles = createUseStyles((theme: AreaTheme) => {
         backgroundColor: '#F9F9F9',
         '& $activityExpenditureLink': {
           color: theme.primaryColor,
-          textDecoration: 'underline !important',
+          // textDecoration: 'underline !important',
         },
         '& $seeChartIcon': {
           fill: (props: LegendEntryProps) => theme.primaryColor,
@@ -28,6 +28,7 @@ export const useStyles = createUseStyles((theme: AreaTheme) => {
     },
     selectedActivity: {
       backgroundColor: '#F9F9F9',
+      color: theme.primaryColor,
       '& $seeChartIcon': {
         visibility: 'visible',
       }
