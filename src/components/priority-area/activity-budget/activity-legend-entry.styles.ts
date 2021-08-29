@@ -8,6 +8,9 @@ export const useStyles = createUseStyles((theme: AreaTheme) => {
       display: 'flex',
       flexDirection: 'column',
       marginBottom: '10px',
+      '&:last-of-type': {
+        marginBottom: '0px',
+      },
       padding: '15px',
       cursor: 'pointer',
 
@@ -21,7 +24,7 @@ export const useStyles = createUseStyles((theme: AreaTheme) => {
           // textDecoration: 'underline !important',
         },
         '& $seeChartIcon': {
-          fill: (props: LegendEntryProps) => theme.primaryColor,
+          fill: theme.primaryColor,
           visibility: 'visible',
         },
       }

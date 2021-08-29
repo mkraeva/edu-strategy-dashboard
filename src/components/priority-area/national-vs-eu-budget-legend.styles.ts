@@ -9,7 +9,7 @@ export const useStyles = createUseStyles((theme: AreaTheme) => {
       flexDirection: 'row',
       justifyContent: 'space-around',
 
-      marginTop: '10px',
+      marginTop: '20px',
     },
     legendIndicationContainer: {
       paddingRight: 10

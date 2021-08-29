@@ -18,7 +18,7 @@ export interface LegendEntryProps {
 
 export const ActivityLegendEntry = (props: LegendEntryProps) => {
   const theme = useTheme<AreaTheme>();
-  const classes = useStyles({ theme, ...props });
+  const classes = useStyles({ theme });
 
   const { activity, selectedActivity, color, areaId, totalAreaBudget } = props;
 

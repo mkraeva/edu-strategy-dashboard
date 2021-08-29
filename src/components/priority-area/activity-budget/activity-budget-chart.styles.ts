@@ -23,8 +23,11 @@ export const useStyles = createUseStyles((theme: AreaTheme) => {
       flexDirection: 'column',
       maxHeight: `${PIE_CHART_LAYOUT.height}px`,
       overflowY: 'auto',
+
+      boxShadow: '0px 15px 15px -5px #eeeeee',
     },
   };
+
   return result;
 });
 
