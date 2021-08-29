@@ -96,3 +96,8 @@
   margin: 5px;
   font-size: smaller;
 }
+
+.no-indicators {
+  font-style:  italic;
+  margin-top:  20px;
+}

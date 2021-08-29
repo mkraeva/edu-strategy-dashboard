@@ -8,16 +8,13 @@ import { CHART_CONFIG } from "./common.styles";
 import "./indicator-chart.css";
 
 interface IndicatorChartProps {
-  indicatorData: IndicatorData[];
-  selectedName: String;
+  records: IndicatorData[];
 }
 
 const IndicatorBoard = ({
-  indicatorData,
-  selectedName,
+  records
 }: IndicatorChartProps) => {
   const currentYear = new Date().getFullYear();
-  const records = indicatorData.filter((d) => d.name === selectedName);
   const year = Math.max(...records.map((d) => d.year).filter((y) => y <= currentYear));
   const value = records?.find((d) => d.year === year)?.value;
   const euAverage = records?.find((d) => d.year === year)?.euAverage;
@@ -53,11 +50,8 @@ const IndicatorBoard = ({
 }
 
 const IndicatorChart = ({
-  indicatorData,
-  selectedName,
+  records
 }: IndicatorChartProps) => {
-  const records = indicatorData.filter((d) => d.name === selectedName);
-
   const historic = records.filter(d => !d.isTarget);
   const years = historic.map((d) => d.year);
   const values = historic.map((d) => d.value);
@@ -184,7 +178,6 @@ const IndicatorChartSelector = ({
     setSelected(indicators[0].name);
   }
   const selectedItem = indicatorData.find((x) => x.name === selected);
-  // console.log(selectedItem);
 
   const sourceLinkElement = selectedItem?.sourceLink?.startsWith("http") ? (
     <p className="indicator-source-link">
@@ -198,17 +191,30 @@ const IndicatorChartSelector = ({
   );
 
   const title = mainArea ? "Ключови индикатори в стратегическата рамка и техните стойности" : "Движение на ключовите индикатори в приоритетната област";
+  const records = indicatorData.filter((d) => d.name === selected);
+
+  if (!records.length) {
+    return (
+        <div>
+          <h2 className="chart-title">{title}</h2>
+          <div className="indicator-chart-container">
+            <div className="no-indicators">
+              <strong>&#x26A0;</strong> За тази приоритетна област все още няма данни за ключови индикатори.
+            </div>
+          </div>
+        </div>
+    );
+  }
+
   const presentation = mainArea ?
     (
       <IndicatorBoard
-        indicatorData={indicatorData}
-        selectedName={selected}
+        records={records}
       />
     ) :
     (
       <IndicatorChart
-        indicatorData={indicatorData}
-        selectedName={selected}
+        records={records}
       />
     );
 

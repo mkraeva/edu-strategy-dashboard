@@ -6,6 +6,9 @@ export const useStyles = createUseStyles((theme: AreaTheme) => {
     priorityArea: {
       display: 'flex',
       flexDirection: 'column',
+      '&>div': {
+        marginTop: '2em',
+      }
     },
     header: {
       display: 'flex',
