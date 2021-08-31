@@ -99,6 +99,10 @@
   font-size: smaller;
 }
 
+.indicator-priority-area {
+  text-align:  center;
+}
+
 .no-indicators {
   font-style:  italic;
   margin-top:  20px;

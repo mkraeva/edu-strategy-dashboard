@@ -208,9 +208,15 @@ const IndicatorChartSelector = ({
 
   const presentation = mainArea ?
     (
-      <IndicatorBoard
-        records={records}
-      />
+      <>
+        <div className="indicator-priority-area">
+          Приоритетна област<br/>
+          <strong>{selectedItem?.area}</strong>
+        </div>
+        <IndicatorBoard
+          records={records}
+        />
+      </>
     ) :
     (
       <IndicatorChart
