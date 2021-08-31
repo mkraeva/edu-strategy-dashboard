@@ -7,7 +7,9 @@
 .chart-title {
   color: #002a41;
   font-weight: bold;
-  font-size: 20px;
+  /*font-size: 20px;*/
+  font-size: 1.5em;
+  margin-top:  2em;
 }
 
 #rhomb {

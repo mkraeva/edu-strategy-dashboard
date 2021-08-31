@@ -15,6 +15,7 @@ export const useStyles = createUseStyles((theme: AreaTheme) => {
     budgetSourceChartContainer: {
       display: 'flex',
       flexDirection: 'column',
+      flexGrow: 1,
     },
     budgetSourceLegend: {
       display: 'flex',
@@ -42,6 +43,15 @@ export const useStyles = createUseStyles((theme: AreaTheme) => {
     budgetSourceName: {
       fontWeight: 'bold',
     },
+    euProgram: {
+      margin: '1em',
+    },
+    budgetSourceEuProgramLogo: {
+      ...smallLogo(10, 10),
+      // display: 'inline-block',
+      float: 'left',
+      marginTop: '0.4em',
+    }
   };
   return result;
 });

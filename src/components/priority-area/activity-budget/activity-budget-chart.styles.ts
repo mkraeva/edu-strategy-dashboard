@@ -11,6 +11,7 @@ export const useStyles = createUseStyles((theme: AreaTheme) => {
     activityBudgetChartContainer: {
       display: 'flex',
       flexDirection: 'column',
+      flexGrow: 1,
     },
     activityBudgetLegendContainer: {
       display: 'flex',

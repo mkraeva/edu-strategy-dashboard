@@ -50,6 +50,7 @@ export const ActivityLegendEntry = (props: LegendEntryProps) => {
               thousandSeparator={true}
               suffix=" лв."
               displayType="text"
+              decimalScale={2}
         />
         <span className={classes.areaPercentage}>[{pct}%]</span>
       </div>

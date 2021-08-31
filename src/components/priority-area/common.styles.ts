@@ -1,6 +1,6 @@
 export const PIE_CHART_LAYOUT: Partial<Plotly.Layout> | any = {
-  width: 480,
-  height: 420,
+  // width: 480,
+  // height: 420,
   dragmode: false,
   autosize: true,
   margin: {
@@ -24,6 +24,6 @@ export const smallLogo = (width: number, height: number) => ({
 
 export const COLORS = {
   nationalBudget: "#024B76",
-  euBudget: '#0678A9',
+  euBudget: '#078cc5', //#0678A9',
   nationalProgram: '#02618F',
 };

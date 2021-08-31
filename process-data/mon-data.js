@@ -79,8 +79,8 @@ worksheet.eachRow((row, rowNumber) => {
   if (rowNumber === 1) return;
   modules.push({
     'Приоритетна област': row.getCell(1).value.match(/\d+: (.*)/)[1],
-    'Програма': row.getCell(2).value?.replaceAll('\n',' ').replaceAll(/["“„”]/g,''),
-    'Модул': row.getCell(3).value?.replaceAll('\n',' ').replaceAll(/["“„”]/g,'') || '',
+    'Програма': row.getCell(2).value?.replaceAll('\n',' ')?.replaceAll(/["“„”]/g,''),
+    'Модул': row.getCell(3).value?.replaceAll('\n',' ')?.replaceAll(/["“„”]/g,'') || '',
     'Вид': row.getCell(4).value,
     'Средства': row.getCell(5).value.result || row.getCell(5).value,
     'Година': row.getCell(6).value,
@@ -99,15 +99,16 @@ for (let row of dataTotals) {
   });
 
   let externalNoOP =
-   row['Средства от ЕС и други международни проекти и програми в лв.'] -
+   row['Средства от ЕС и други международни проекти и програми в лв.'];
+   /* -
    _.sumBy(modules.filter(m => m['Година'] === year && m['Приоритетна област'] === priArea && m['Вид'] === 'Европейски програми и проекти')
-    ,'Средства');
+    ,'Средства'); */
 
   if (externalNoOP < 0) externalNoOP = 0;
 
   modules.push({
     'Приоритетна област': priArea,
-    'Програма': 'Средства от ЕС и други международни проекти (без оперативни програми)',
+    'Програма': 'Средства от ЕС и други международни проекти',
     'Модул': '',
     'Вид': 'Външен източник',
     'Средства': externalNoOP,

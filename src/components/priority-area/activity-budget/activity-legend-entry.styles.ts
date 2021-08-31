@@ -7,11 +7,11 @@ export const useStyles = createUseStyles((theme: AreaTheme) => {
     activityEntry: {
       display: 'flex',
       flexDirection: 'column',
-      marginBottom: '10px',
+      // marginBottom: '10px',
       '&:last-of-type': {
         marginBottom: '0px',
       },
-      padding: '15px',
+      padding: '15px 15px 0',
       cursor: 'pointer',
 
       color: 'black !important',

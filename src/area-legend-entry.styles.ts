@@ -6,7 +6,7 @@ export const useStyles = createUseStyles((theme: AreaTheme) => {
     areaLegendEntry: {
       margin: '24px',
       marginLeft: '50px',
-      maxWidth: '450px',
+      // maxWidth: '450px',
 
       display: 'flex',
       flexDirection: 'row',
@@ -19,7 +19,8 @@ export const useStyles = createUseStyles((theme: AreaTheme) => {
       marginRight: '16px',
     },
     areaData: {
-
+      display: 'flex',
+      flexDirection: 'column',
     },
     areaStats: {
       marginTop: '15px',
@@ -27,12 +28,12 @@ export const useStyles = createUseStyles((theme: AreaTheme) => {
     },
     areaName: {
       fontWeight: 'bold',
-      fontSize: '1.5em',
+      fontSize: '1.3em',
     },
     areaPercentage: {
       // backgroundColor: `${theme.primaryColor}55`,
       padding: '0 3px 3px',
-      fontWeight: 'bold',
+      // fontWeight: 'bold',
     },
     seeMore: {
       display: 'inline-block',
@@ -50,6 +51,8 @@ export const useStyles = createUseStyles((theme: AreaTheme) => {
 
       position: 'relative',
       top: '-30px',
+      width: '120px',
+      textAlign: 'center',
     }
   };
   return result;

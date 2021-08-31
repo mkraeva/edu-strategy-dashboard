@@ -38,13 +38,13 @@ const nationalProgramColors = [
 const budgetColors = areaColors;
 
 const europeanProgramColors = [
-  '#02618F',
-  '#02618F',
-  '#02618F',
-  '#02618F',
-  '#02618F',
-  '#02618F',
-  '#02618F',
+  '#038ace', //'#02618F',
+  '#038ace', //'#02618F',
+  '#038ace', //'#02618F',
+  '#038ace', //'#02618F',
+  '#038ace', //'#02618F',
+  '#038ace', //'#02618F',
+  '#038ace', //'#02618F',
   '#82C44A',
   '#82C44A',
 ];

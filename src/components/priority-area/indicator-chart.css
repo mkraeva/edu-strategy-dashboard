@@ -4,7 +4,8 @@
 }
 
 .indicator-list {
-  width: 460px;
+  width:  40%;
+  min-width: 460px;
   height: 400px;
   overflow-y: auto;
   overflow-x: hidden;

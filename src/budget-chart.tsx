@@ -31,17 +31,12 @@ const BudgetChart: React.FC<BudgetChartProps> = ({ budgetData }) => {
               },
               type: 'pie',
               showlegend: false,
+              textinfo: 'none',
             },
           ]}
           layout={PIE_CHART_LAYOUT}
         />
         <div className={classes.totalsData}>
-          <div>
-            <p className={classes.totalsNumber}>
-              {12}
-            </p>
-            изпълнявани програми
-          </div>
           <div>
             <p className={classes.totalsNumber}>
               <NumberFormat
@@ -53,6 +48,18 @@ const BudgetChart: React.FC<BudgetChartProps> = ({ budgetData }) => {
               />
             </p>
             отчетени разходи
+          </div>
+          <div>
+            <p className={classes.totalsNumber}>
+              {budgetData.filter(d => d.type === 'Национална програма').length}
+            </p>
+            изпълнявани национални програми
+          </div>
+          <div>
+            <p className={classes.totalsNumber}>
+              {budgetData.filter(d => d.type === 'Европейски програми и проекти').length}
+            </p>
+            изпълнявани европейски проекти и програми
           </div>
         </div>
       </div>

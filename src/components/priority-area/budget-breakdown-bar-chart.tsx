@@ -75,6 +75,7 @@ export const BudgetSourceBreakdownBarChart = ({
           showlegend: false,
           dragmode: false,
           height: 70,
+          width: 700,
           paper_bgcolor: 'transparent',
           plot_bgcolor: 'transparent',
           margin: {

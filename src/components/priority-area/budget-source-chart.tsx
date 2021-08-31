@@ -28,7 +28,10 @@ function getModuleName(moduleData: ModuleData) {
   return moduleData.program;
 }
 
-const BudgetSourceEntryComponent = ({ moduleData, totalBudget, color }: { moduleData: ModuleData, totalBudget: number, color: string }) => {
+const BudgetSourceEntryComponent = (
+  { moduleData, totalBudget, color, children }:
+  { moduleData: ModuleData, totalBudget: number, color: string, children: ModuleData[] }
+  ) => {
   const theme = useTheme<AreaTheme>();
   const classes = useStyles({ theme });
 
@@ -57,12 +60,31 @@ const BudgetSourceEntryComponent = ({ moduleData, totalBudget, color }: { module
             thousandSeparator={true}
             suffix=" лв."
             displayType="text"
+            decimalScale={2}
           />
           &nbsp;<span style={{
             //backgroundColor: `${color}55`,
             //fontWeight: 'bold',
             padding: '0 3px 3px'
           }}>[{pct}%]</span>
+          {!!children.length &&
+            <>
+              <p>В това число средства по проекти:</p>
+              {children.map((c,idx) => (
+                <div key={idx}>
+                  <div
+                    className={classes.budgetSourceEuProgramLogo}
+                    style={{
+                      backgroundColor: color,
+                    }}
+                  />
+                  <span className={classes.euProgram}>
+                    {c.program}
+                  </span>
+                </div>
+              ))}
+            </>
+          }
         </div>
       </div>
     </div>
@@ -74,8 +96,9 @@ const BudgetSourceChartComponent = ({ budgetData, area }: BudgetSourceChartProps
   const classes = useStyles({ theme });
 
   const nationalPrograms = getDataByType(budgetData, BudgetSourceType.NationalProgram);
-  const euPrograms = getDataByType(budgetData, BudgetSourceType.EuropeanProgram)
-                      .concat(getDataByType(budgetData, BudgetSourceType.ExternalSource));
+  const euPrograms = getDataByType(budgetData, BudgetSourceType.ExternalSource);
+                      // getDataByType(budgetData, BudgetSourceType.EuropeanProgram)
+                      // .concat(getDataByType(budgetData, BudgetSourceType.ExternalSource));
   const budgetItems = getDataByType(budgetData, BudgetSourceType.YearlyBudget);
 
   const nationalProgramShades = generateShades(
@@ -133,6 +156,11 @@ const BudgetSourceChartComponent = ({ budgetData, area }: BudgetSourceChartProps
             moduleData={moduleData}
             totalBudget={totalAreaBudget}
             color={reorderedColors[idx]}
+            children={
+              moduleData.type === BudgetSourceType.ExternalSource ?
+              getDataByType(budgetData, BudgetSourceType.EuropeanProgram) :
+              []
+            }
           />
           )) }
         </div>

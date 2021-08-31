@@ -30,6 +30,7 @@ const AreaLegendEntry = ({area, nationalBudget, externalBudget, totalBudget }: A
           thousandSeparator={true}
           suffix=" лв."
           displayType="text"
+          decimalScale={2}
         />
         &nbsp;<span className={classes.areaPercentage}>[{budgetPercentage.toPrecision(2)}%]</span>
       </div>
