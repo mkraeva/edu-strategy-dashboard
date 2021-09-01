@@ -1,7 +1,7 @@
 import { createUseStyles, WithStylesProps } from 'react-jss';
 import { AreaTheme } from '../../../themes';
 import { smallLogo } from '../common.styles';
-import { LegendEntryProps } from './activity-legend-entry';
+
 export const useStyles = createUseStyles((theme: AreaTheme) => {
   const result = {
     activityEntry: {

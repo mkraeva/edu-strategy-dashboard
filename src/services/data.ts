@@ -1,5 +1,7 @@
+import { uniq } from 'lodash';
 import Papa from 'papaparse';
 import packageJson from '../../package.json';
+import { hashActivity } from '../lib/util';
 
 const DATA_FILE_PREFIX = packageJson.dataFilePrefix || process.env.PUBLIC_URL;
 
@@ -84,6 +86,12 @@ export async function fetchDataPerActivity() {
         if (errors?.length) {
           reject(errors);
         } else {
+          const uniqueActivities = uniq(data.map(a => (a as any).activity));
+          const hashes = uniqueActivities.map(a => hashActivity(a));
+          const sanityCheck = uniq(hashes);
+          if (hashes.length !== sanityCheck.length) {
+            reject('Някои дейности имат еднакъв хеш!');
+          }
           resolve(data as ActivityData[]);
         }
       },

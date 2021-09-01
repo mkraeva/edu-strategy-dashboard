@@ -1,6 +1,6 @@
 import { createUseStyles, WithStylesProps } from 'react-jss';
 import { AreaTheme } from '../../themes';
-import { PIE_CHART_LAYOUT, smallLogo } from './common.styles';
+import { smallLogo } from './common.styles';
 
 export const useStyles = createUseStyles((theme: AreaTheme) => {
   const result = {
@@ -20,7 +20,7 @@ export const useStyles = createUseStyles((theme: AreaTheme) => {
     budgetSourceLegend: {
       display: 'flex',
       flexDirection: 'column',
-      maxHeight: `${PIE_CHART_LAYOUT.height + 100}px`,
+      maxHeight: '600px',
       overflowY: 'auto',
 
       marginLeft: '50px',

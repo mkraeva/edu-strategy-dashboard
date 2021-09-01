@@ -15,8 +15,6 @@ import {
   IndicatorData,
   ModuleData,
 } from "./services/data";
-import packageJson from '../package.json';
-const IMAGES_PREFIX = packageJson.assetsPrefix || process.env.PUBLIC_URL;
 
 interface AppProps {}
 interface AppState {

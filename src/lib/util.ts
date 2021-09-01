@@ -26,10 +26,12 @@ export function hashActivity(value: string) {
     return hashCache.get(value)!;
   }
 
+  const MAX_HASH = 1 << 28; // 7 digits in hex
   let h = 0;
-  let length = value.length >> 2;
+  let length = value.length;
   for (let i = 0; i < length; i++) {
       h = 31 * h + value.charCodeAt(i);
+      h = h % MAX_HASH;
   }
   let hash = h.toString(16);
   hashCache.set(value, hash);

@@ -1,5 +1,4 @@
 import { createUseStyles, WithStylesProps } from 'react-jss';
-import { PIE_CHART_LAYOUT } from './components/priority-area/common.styles';
 import { AreaTheme } from './themes';
 
 export const useStyles = createUseStyles((theme: AreaTheme) => {
