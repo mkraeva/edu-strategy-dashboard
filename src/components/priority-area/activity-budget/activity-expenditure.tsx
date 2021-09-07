@@ -52,6 +52,7 @@ const ActivityExpenditure: React.FC<{ expenditureData: ExpenditureData[] }> = ({
             margin: {
               pad: 20,
               t: 10,
+              l: 200,
             },
             // legend: {
             //   orientation: 'h'

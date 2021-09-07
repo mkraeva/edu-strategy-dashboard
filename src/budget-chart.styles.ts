@@ -1,15 +1,12 @@
 import { createUseStyles, WithStylesProps } from 'react-jss';
 import { AreaTheme } from './themes';
+import { PIE_CHART_LAYOUT } from './components/priority-area/common.styles';
 
 export const useStyles = createUseStyles((theme: AreaTheme) => {
   const result = {
     budgetChartContainer: {
       display: 'flex',
       flexDirection: 'row',
-      flexGrow: 1,
-    },
-    chartTitle: {
-      fontSize: '1.5em',
     },
     budgetChartChartContainer: {
       display: 'flex',
@@ -31,7 +28,24 @@ export const useStyles = createUseStyles((theme: AreaTheme) => {
     totalsNumber: {
       fontSize: '3em',
       fontFamily: 'Open Sans Condensed',
-    }
+    },
+    budgetChartTitle: {
+    },
+    '@media screen and (max-width: 480px)': {
+      budgetChartContainer: {
+        flexDirection: 'column',
+      },
+      totalsData: {
+        order: -1,
+        fontSize: '1em',
+        '&>div': {
+          marginTop: 0,
+        }
+      },
+      budgetChartTitle: {
+        order: -3,
+      }
+    },
   };
   return result;
 });

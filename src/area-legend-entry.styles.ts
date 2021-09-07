@@ -53,7 +53,27 @@ export const useStyles = createUseStyles((theme: AreaTheme) => {
       top: '-30px',
       width: '120px',
       textAlign: 'center',
-    }
+    },
+    '@media screen and (max-width: 480px)': {
+      areaLegendEntry: {
+        marginLeft: 0,
+        width: '100%',
+        // flexDirection: 'column',
+      },
+      areaLogo: {
+        width: '40px',
+        height: '40px',
+        marginRight: '16px',
+      },
+      areaData: {
+        fontSize: '0.8em',
+        width:'100%',
+        overflowX: 'clip',
+      },
+      seeMore: {
+        top: '-10px',
+      },
+    },
   };
   return result;
 });

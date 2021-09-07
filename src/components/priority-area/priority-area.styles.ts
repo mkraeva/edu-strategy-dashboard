@@ -53,6 +53,21 @@ export const useStyles = createUseStyles((theme: AreaTheme) => {
 
       fontWeight: 'bold',
     },
+    '@media screen and (max-width: 480px)': {
+      areaLogo: {
+        width: '70px',
+        height: '70px',
+      },
+      headerAreaName: {
+        fontSize: '1.5em',
+      },
+      header: {
+        marginBottom: 0,
+      },
+      mainContainer: {
+        marginTop: 0,
+      },
+    },
   };
   return result;
 });

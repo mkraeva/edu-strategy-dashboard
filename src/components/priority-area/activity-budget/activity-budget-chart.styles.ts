@@ -26,6 +26,15 @@ export const useStyles = createUseStyles((theme: AreaTheme) => {
 
       boxShadow: '0px 15px 15px -5px #eeeeee',
     },
+    '@media screen and (max-width: 480px)': {
+      activityBudgetContainer: {
+        flexDirection: 'column',
+      },
+      activityBudgetLegendContainer: {
+        marginLeft: 0,
+        marginBottom: '3em',
+      },
+    },
   };
 
   return result;

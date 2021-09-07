@@ -18,7 +18,7 @@ const BudgetChart: React.FC<BudgetChartProps> = ({ budgetData }) => {
   return (
     <div className={classes.budgetChartContainer}>
       <div className={classes.budgetChartChartContainer}>
-        <h2 className="chart-title">Изразходвани средства по приоритетна област (на годишна база)</h2>
+        <h2 className={[classes.budgetChartTitle, "chart-title"].join(' ')}>Изразходвани средства по приоритетна област (на годишна база)</h2>
         <YearBreakdown/>
         <Plot
           config={CHART_CONFIG}
@@ -31,7 +31,7 @@ const BudgetChart: React.FC<BudgetChartProps> = ({ budgetData }) => {
               },
               type: 'pie',
               showlegend: false,
-              textinfo: 'none',
+              // textinfo: 'none',
             },
           ]}
           layout={PIE_CHART_LAYOUT}

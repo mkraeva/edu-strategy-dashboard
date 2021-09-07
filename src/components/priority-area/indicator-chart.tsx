@@ -98,28 +98,35 @@ const IndicatorChart = ({
   ];
 
   const plotLayout: Partial<Plotly.Layout> = {
-    width: 680,
+    width: window.innerWidth > 480 ? 680 : 400,
     height: 400,
     grid: {
       rows: 10,
     },
     yaxis: {
-      title: "Стойност",
+      // title: "Стойност",
       // range: [0, 100],
       // tickvals: range(0, 100, 10),
     },
     xaxis: {
-      title: "Година",
+      // title: "Година",
       tickvals: years.concat(targetYears),
+      automargin: true,
     },
-    hovermode: "y",
+    // hovermode: "y",
     legend: {
-      orientation: "v",
+      orientation: "h",
+      yanchor: "top",
+      y: -0.2,
+      xanchor: "left",
+      x: -0.2
     },
     margin: {
       t: 20,
+      l: 0,
+      autoexpand: true,
     },
-    dragmode: false
+    dragmode: false,
   };
 
   return (

@@ -12,9 +12,27 @@
   margin-top:  2em;
 }
 
-#rhomb {
+/*#rhomb {
   position: absolute;
   top: -20px;
   left: -20px;
   z-index: 3;
+}*/
+
+@media screen and (max-width: 480px) {
+  .legend {
+    width:  100%;
+  }
+
+  .rc-slider {
+    order: -2;
+  }
+
+  .chart-title {
+    margin-top:  0;
+  }
+
+  h2 {
+    text-transform: uppercase;
+  }
 }

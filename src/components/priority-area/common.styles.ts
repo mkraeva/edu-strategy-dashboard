@@ -4,6 +4,7 @@ export const PIE_CHART_LAYOUT: Partial<Plotly.Layout> | any = {
   dragmode: false,
   autosize: true,
   margin: {
+    pad: 10,
     t: 10,
     b: 10,
     l: 0,
@@ -12,7 +13,8 @@ export const PIE_CHART_LAYOUT: Partial<Plotly.Layout> | any = {
 };
 
 export const CHART_CONFIG: Partial<Plotly.Config> = {
-  displayModeBar: false
+  displayModeBar: false,
+  // responsive: true,
 };
 
 export const smallLogo = (width: number, height: number) => ({

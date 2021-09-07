@@ -23,6 +23,7 @@ const xaxisLayout = (data: BudgetBreakdownData) => {
     ticktext: [formatLv(data.nationalBudget), formatLv(data.euBudget)],
     ticklabelposition: budgetRatio < 0.3 ? 'outside right' : 'outside',
     ticklabeloverflow: 'allow',
+    automargin: true,
   };
 }
 
@@ -39,7 +40,7 @@ export const BudgetSourceBreakdownBarChart = ({
   return (
     <>
       <Plot
-        config={CHART_CONFIG}
+        config={{...CHART_CONFIG, ...{responsive: true}}}
         data={[
           {
             y: [data.name],
@@ -74,14 +75,14 @@ export const BudgetSourceBreakdownBarChart = ({
         layout={{
           showlegend: false,
           dragmode: false,
-          height: 70,
-          width: 700,
+          height: 80,
+          width: window.innerWidth > 480 ? 700 : 350,
           paper_bgcolor: 'transparent',
           plot_bgcolor: 'transparent',
           margin: {
             pad: 0,
             t: 0,
-            b: 50,
+            b: 60,
             l: 0,
           },
           yaxis: {

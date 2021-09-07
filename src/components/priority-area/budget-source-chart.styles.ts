@@ -51,7 +51,16 @@ export const useStyles = createUseStyles((theme: AreaTheme) => {
       // display: 'inline-block',
       float: 'left',
       marginTop: '0.4em',
-    }
+    },
+    '@media screen and (max-width: 480px)': {
+      budgetSourceLegend: {
+        maxHeight: '400px',
+        margin: '40px 0 40px 20px',
+      },
+      dataContainer: {
+        flexDirection: 'column',
+      },
+    },
   };
   return result;
 });

@@ -61,7 +61,12 @@ export const useStyles = createUseStyles((theme: AreaTheme) => {
     },
     areaPercentage: {
       padding: '0 3px 3px',
-    }
+    },
+    '@media screen and (max-width: 480px)': {
+      filterTitle: {
+        margin: '20px 20px 20px 0'
+      }
+    },
   };
   return result;
 });
