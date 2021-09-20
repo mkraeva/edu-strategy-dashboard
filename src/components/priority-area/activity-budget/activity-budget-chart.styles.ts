@@ -26,6 +26,11 @@ export const useStyles = createUseStyles((theme: AreaTheme) => {
 
       boxShadow: '0px 15px 15px -5px #eeeeee',
     },
+    totalSum: {
+      fontWeight: 'bold',
+      textAlign: 'center',
+      marginTop: '2em',
+    },
     '@media screen and (max-width: 480px)': {
       activityBudgetContainer: {
         flexDirection: 'column',

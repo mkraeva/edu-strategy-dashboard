@@ -52,6 +52,11 @@ export const useStyles = createUseStyles((theme: AreaTheme) => {
       float: 'left',
       marginTop: '0.4em',
     },
+    totalSum: {
+      fontWeight: 'bold',
+      textAlign: 'center',
+      marginTop: '2em',
+    },
     '@media screen and (max-width: 480px)': {
       budgetSourceLegend: {
         maxHeight: '400px',

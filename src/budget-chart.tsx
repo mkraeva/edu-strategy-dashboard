@@ -3,7 +3,7 @@ import { AreaLegend } from './area-legend';
 import { useStyles } from './budget-chart.styles';
 import { CHART_CONFIG, PIE_CHART_LAYOUT } from './components/priority-area/common.styles';
 import { Plot } from './lib/util';
-import { sumBy } from 'lodash';
+import { sumBy, uniq } from 'lodash';
 import { ModuleData } from './services/data';
 import { getAreaTheme } from './themes';
 import YearBreakdown from './year-breakdown';
@@ -51,13 +51,13 @@ const BudgetChart: React.FC<BudgetChartProps> = ({ budgetData }) => {
           </div>
           <div>
             <p className={classes.totalsNumber}>
-              {budgetData.filter(d => d.type === 'Национална програма').length}
+              {uniq(budgetData.filter(d => d.type === 'Национална програма').map(d=>d.program)).length}
             </p>
             изпълнявани национални програми
           </div>
           <div>
             <p className={classes.totalsNumber}>
-              {budgetData.filter(d => d.type === 'Европейски програми и проекти').length}
+              {uniq(budgetData.filter(d => d.type === 'Европейски програми и проекти').map(d=>d.program)).length}
             </p>
             изпълнявани европейски проекти и програми
           </div>

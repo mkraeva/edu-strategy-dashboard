@@ -6,6 +6,7 @@ import { hashActivity, isMatchingActivity, Plot } from "../../../lib/util";
 import { ActivityData, ExpenditureData } from "../../../services/data";
 import { AreaTheme, generateShades } from "../../../themes";
 import YearBreakdown from "../../../year-breakdown";
+import NumberFormat from "react-number-format";
 import { ActivityExpenditure } from "./activity-expenditure";
 import { useTheme } from "react-jss";
 import { NationalEUBudgetLegend } from "../national-vs-eu-budget-legend";
@@ -69,6 +70,15 @@ const ActivityBudgetChart: React.FC<ActivityBudgetChartProps> = ({
             ]}
             layout={PIE_CHART_LAYOUT}
           />
+          <div className={classes.totalSum}>Обща сума:&nbsp;
+            <NumberFormat
+              value={totalAreaBudget}
+              thousandSeparator={true}
+              suffix=" лв."
+              displayType="text"
+              decimalScale={2}
+            />
+          </div>
         </div>
         <div className={classes.activityBudgetLegendContainer}>
           <div className={classes.activityBudgetLegendList}>

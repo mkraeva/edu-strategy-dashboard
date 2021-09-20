@@ -6,6 +6,30 @@ import { useStyles } from "./activity-expenditure.styles";
 import { CHART_CONFIG } from "../common.styles";
 import { NationalEUBudgetLegend } from "../national-vs-eu-budget-legend";
 
+function fold(s: string, n: number, useSpaces: boolean, a: Array<string> = []): Array<string> {
+    a = a || [];
+    if (s.length <= n) {
+        a.push(s);
+        return a;
+    }
+    var line = s.substring(0, n);
+    if (! useSpaces) { // insert newlines anywhere
+        a.push(line);
+        return fold(s.substring(n), n, useSpaces, a);
+    }
+    else { // attempt to insert newlines after whitespace
+        var lastSpaceRgx = /\s(?!.*\s)/;
+        var idx = line.search(lastSpaceRgx);
+        var nextIdx = n;
+        if (idx > 0) {
+            line = line.substring(0, idx);
+            nextIdx = idx;
+        }
+        a.push(line);
+        return fold(s.substring(nextIdx), n, useSpaces, a);
+    }
+}
+
 const ActivityExpenditure: React.FC<{ expenditureData: ExpenditureData[] }> = ({ expenditureData }) => {
   const theme = useTheme<AreaTheme>();
   const classes = useStyles({ theme });
@@ -18,7 +42,7 @@ const ActivityExpenditure: React.FC<{ expenditureData: ExpenditureData[] }> = ({
           config={CHART_CONFIG}
           data={[
             {
-              y: expenditureData.map((a) => a.expenseType),
+              y: expenditureData.map((a) => fold(a.expenseType, window.innerWidth > 480 ? 40 : 20, true).join('<br>')),
               x: expenditureData.map(
                 (a) => a.nationalBudget
               ),
@@ -33,7 +57,7 @@ const ActivityExpenditure: React.FC<{ expenditureData: ExpenditureData[] }> = ({
               name: "Средства от националния бюджет (%)",
             },
             {
-              y: expenditureData.map((a) => a.expenseType),
+              y: expenditureData.map((a) => fold(a.expenseType, window.innerWidth > 480 ? 40 : 20, true).join('<br>')),
               x: expenditureData.map((a) => a.externalBudget),
               hoverinfo: "x",
               width: 0.25,
@@ -52,7 +76,8 @@ const ActivityExpenditure: React.FC<{ expenditureData: ExpenditureData[] }> = ({
             margin: {
               pad: 20,
               t: 10,
-              l: 200,
+              l: 0,
+              r: 0,
             },
             // legend: {
             //   orientation: 'h'

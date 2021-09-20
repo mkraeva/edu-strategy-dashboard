@@ -148,6 +148,15 @@ const BudgetSourceChartComponent = ({ budgetData, area }: BudgetSourceChartProps
             layout={PIE_CHART_LAYOUT}
           />
           <NationalEUBudgetLegend includeNationalPrograms={true}/>
+          <div className={classes.totalSum}>Обща сума:&nbsp;
+            <NumberFormat
+              value={totalAreaBudget}
+              thousandSeparator={true}
+              suffix=" лв."
+              displayType="text"
+              decimalScale={2}
+            />
+          </div>
         </div>
         <div className={classes.budgetSourceLegend}>
           { reordered.map((moduleData, idx) => (
