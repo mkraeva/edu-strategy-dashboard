@@ -16,6 +16,7 @@ export const useStyles = createUseStyles((theme: AreaTheme) => {
       display: 'flex',
       flexDirection: 'column',
       flexGrow: 1,
+      minWidth: '460px',
     },
     budgetSourceLegend: {
       display: 'flex',

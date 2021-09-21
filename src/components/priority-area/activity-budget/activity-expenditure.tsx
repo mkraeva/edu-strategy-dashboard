@@ -91,6 +91,10 @@ const ActivityExpenditure: React.FC<{ expenditureData: ExpenditureData[] }> = ({
             yaxis: {
               automargin: true,
             },
+            xaxis: {
+              exponentformat: 'none',
+              separatethousands: true,
+            },
             showlegend: false,
             barmode: "stack",
           }}

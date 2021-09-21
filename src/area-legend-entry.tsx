@@ -40,7 +40,7 @@ const AreaLegendEntry = ({area, nationalBudget, externalBudget, totalBudget }: A
         euBudget: externalBudget,
       }}/>
       <Link
-        to={`/priority-area/${area.id}`}
+        to={`/priority-area/${area.id+1}`}
         className={classes.seeMore}
       >
         Виж повече

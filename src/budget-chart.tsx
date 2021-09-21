@@ -40,7 +40,7 @@ const BudgetChart: React.FC<BudgetChartProps> = ({ budgetData }) => {
           <div>
             <p className={classes.totalsNumber}>
               <NumberFormat
-                value={sumBy(budgetData,'budget')}
+                value={sumBy(budgetData.filter(d => d.type !== 'Европейски програми и проекти'),'budget')}
                 thousandSeparator={true}
                 decimalScale={0}
                 suffix=" лв."

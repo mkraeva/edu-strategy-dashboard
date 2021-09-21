@@ -37,7 +37,7 @@ export const AreaLegend: React.FC<BudgetChartProps> = ({
             .filter(
               (d) =>
                 [
-                  BudgetSourceType.EuropeanProgram,
+                  // BudgetSourceType.EuropeanProgram,
                   BudgetSourceType.ExternalSource,
                 ].indexOf(d.type) >= 0
             )

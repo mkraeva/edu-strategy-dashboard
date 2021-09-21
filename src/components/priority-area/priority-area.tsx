@@ -17,7 +17,7 @@ export type PriorityAreaProps = {
 
 const PriorityArea = (props: PriorityAreaProps) => {
   const params = useParams<{ id: string }>();
-  const areaId = Number(params.id);
+  const areaId = Number(params.id) - 1;
   const area = priorityAreas.find(({ id }) => id === areaId)!;
   const theme = getAreaTheme(area.name);
   const classes = useStyles({ theme, ...props });

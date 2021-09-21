@@ -24,7 +24,7 @@ for (let year in files) {
 
   worksheet.eachRow((row, rowNumber) => {
     let firstCell = row.getCell(1).value;
-    let titleActivity = firstCell?.match(/^(\d+) (.*)/);
+    let titleActivity = firstCell?.match(/^(\d+)\s+(.*)/);
     let titleTotal = firstCell === 'ОБЩО';
     if (titleActivity) {
       lastActivity = `Дейност ${titleActivity[1]} "${titleActivity[2]}"`;
@@ -38,7 +38,7 @@ for (let year in files) {
           'Средства в лв. от националния бюджет (без национални програми)': nat || 0,
           'Средства от ЕС и други международни проекти и програми в лв.': eu || 0,
         });
-        //console.log(dataPerActivity[dataPerActivity.length-1])
+        // console.log(dataPerActivity[dataPerActivity.length-1])
       }
     }
     else if (titleTotal) {
@@ -116,20 +116,20 @@ for (let row of dataTotals) {
   });
 }
 
-fs.writeFileSync('data-per-activity.csv','\ufeff' + stringify(dataPerActivity,{
-  header: true,
-  delimiter: '\t',
-}), 'utf-8');
+// fs.writeFileSync('data-per-activity.csv','\ufeff' + stringify(dataPerActivity,{
+//   header: true,
+//   delimiter: '\t',
+// }), 'utf-8');
 
-fs.writeFileSync('data-totals.csv','\ufeff' + stringify(dataTotals,{
-  header: true,
-  delimiter: '\t',
-}), 'utf-8');
+// fs.writeFileSync('data-totals.csv','\ufeff' + stringify(dataTotals,{
+//   header: true,
+//   delimiter: '\t',
+// }), 'utf-8');
 
-fs.writeFileSync('data-expenditure.csv','\ufeff' + stringify(dataPerExpenditure,{
-  header: true,
-  delimiter: '\t',
-}), 'utf-8');
+// fs.writeFileSync('data-expenditure.csv','\ufeff' + stringify(dataPerExpenditure,{
+//   header: true,
+//   delimiter: '\t',
+// }), 'utf-8');
 
 fs.writeFileSync('data-per-module.csv','\ufeff' + stringify(modules,{
   header: true,
