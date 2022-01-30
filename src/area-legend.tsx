@@ -16,7 +16,7 @@ export const AreaLegend: React.FC<BudgetChartProps> = ({
   budgetData,
 }: BudgetChartProps) => {
   const grouped = groupBy(budgetData, "area");
-  const totalBudget = sum(budgetData.map((d) => d.budget));
+  const totalBudget = sum(budgetData.filter(d => d.type != BudgetSourceType.EuropeanProgram).map((d) => d.budget));
   const budgetByArea = new Map(
     Array.from(grouped.entries()).map(([areaName, areaModules]) => [
       areaName,

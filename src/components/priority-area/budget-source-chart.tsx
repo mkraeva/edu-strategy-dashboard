@@ -143,6 +143,9 @@ const BudgetSourceChartComponent = ({ budgetData, area }: BudgetSourceChartProps
                 showlegend: false,
                 sort: false,
                 textinfo: 'none',
+                texttemplate: '%{percent:.2%}',
+                textposition: 'inside',
+                hovertemplate: '%{label}<br>%{percent:.2%}<br>%{value}<extra></extra>',
               },
             ]}
             layout={PIE_CHART_LAYOUT}

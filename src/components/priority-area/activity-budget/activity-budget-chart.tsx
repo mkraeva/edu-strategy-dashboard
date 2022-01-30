@@ -63,9 +63,12 @@ const ActivityBudgetChart: React.FC<ActivityBudgetChartProps> = ({
                 marker: {
                   colors: colors,
                 },
-                type: "pie",
+                type: 'pie',
                 showlegend: false,
-                textinfo: "none",
+                textinfo: 'none',
+                texttemplate: '%{percent:.2%}',
+                textposition: 'inside',
+                hovertemplate: '%{label}<br>%{percent:.2%}<br>%{value}<extra></extra>',
               },
             ]}
             layout={PIE_CHART_LAYOUT}
